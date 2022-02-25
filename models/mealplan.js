@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   MealPlan.init({
-    name: DataTypes.STRING
+    spoonacularID: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'MealPlan',

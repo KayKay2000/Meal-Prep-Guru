@@ -8,8 +8,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
+      spoonacularID: {
+        type: Sequelize.INTEGER
       },
       UserId: {
         type: Sequelize.INTEGER,
