@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Favorites);
+      User.hasMany(models.Favorite);
       User.hasMany(models.MealPlan);
     }
   }
@@ -21,7 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    phone: DataTypes.TEXT
+    phone: DataTypes.TEXT,
+    spoonacularUsername: DataTypes.STRING,
+    spoonacularHash: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',

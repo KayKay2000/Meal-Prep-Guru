@@ -11,7 +11,7 @@ module.exports = {
       recipeID: {
         type: Sequelize.INTEGER
       },
-      UserId: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Users",
