@@ -8,7 +8,9 @@ module.exports = {
       lastName: 'Rackley',
       email: 'rr31017@yahoo.com',
       password: 'madmoney1017',
-      phone: '770-736-6273',
+      phoneNumber: '770-736-6273',
+      spoonacularUsername: 'slickrick10170',
+      spoonacularHash: 'HashHashHash',
       createdAt: new Date(),
       updatedAt: new Date()
     }])
