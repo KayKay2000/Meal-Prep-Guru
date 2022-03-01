@@ -1,6 +1,5 @@
 
-import MealCalendar from './components/MealCalendar';
-import { useEffect, useState } from 'react';
+import MealCalendar from './components/meal_calendar/MealCalendar';
 import {Route, Routes} from 'react-router';
 import {Link} from 'react-router-dom';
 import './App.css';
@@ -8,16 +7,6 @@ import Home from './pages/Home';
 import { Center, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 
 function App() {
-  const [ calendarData, setCalendarData ] = useState([])
-
-  useEffect(() => {
-    fetch('https://api.spoonacular.com/mealplanner/safehaven10170/week/2022-02-28?hash=0fb6857bd66e0696aeab9f75bf6cfe0c4494f179')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data.days);
-      console.log(new Date(data.days[0].date).getHours());
-    })
-  }, [])
   return (
     <div className="App">
       <Center p={10}>
@@ -35,12 +24,17 @@ function App() {
    >Main Menu </MenuButton>
   <MenuList>
     <MenuItem>
-    <Link to="/home">Home</Link>    </MenuItem>
+      <Link to="/home">Home</Link>    
+    </MenuItem>
+    <MenuItem>
+      <Link to="/meal-planner">Meal Planner</Link>    
+    </MenuItem>
   </MenuList>
 </Menu>
 </nav>
 <Routes>
   <Route path="/home" element={<Home />} />
+  <Route path="/meal-planner" element={<MealCalendar />} />
 </Routes>
     </div>
   );
