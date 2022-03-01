@@ -23,8 +23,14 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      phone: {
+      phoneNumber: {
         type: Sequelize.TEXT
+      },
+      spoonacularUsername: {
+        type: Sequelize.STRING
+      },
+      spoonacularHash: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
