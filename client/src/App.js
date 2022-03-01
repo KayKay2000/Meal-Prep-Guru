@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import MealCalendar from './components/MealCalendar';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [ calendarData, setCalendarData ] = useState([])
+
+  useEffect(() => {
+    fetch('https://api.spoonacular.com/mealplanner/safehaven10170/week/2022-02-28?hash=0fb6857bd66e0696aeab9f75bf6cfe0c4494f179')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data.days);
+      console.log(new Date(data.days[0].date).getHours());
+    })
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MealCalendar />
     </div>
   );
 }
