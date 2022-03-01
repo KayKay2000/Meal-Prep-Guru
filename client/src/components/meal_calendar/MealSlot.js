@@ -4,7 +4,17 @@ import styled from 'styled-components'
 function MealSlot(props) {
     return (
     <SlotContainer>
-        {props.slotData}
+        {props.slotData === 'No Data' ? 
+            'No Data' 
+            : 
+            props.slotData.type === 'meals' ? 
+            props.slotData.items.length > 0 ?
+                props.slotData.items.map(item => item.value.title)
+                :
+                'No Data'
+            :
+            props.slotData.items
+        }
     </SlotContainer>
   )
 }

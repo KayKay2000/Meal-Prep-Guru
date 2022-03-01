@@ -12,10 +12,10 @@ function MealCalendar() {
     .then(data => {
       setMealPlan(data.days);
     })
-  }, [mealPlan])
+  }, [])
   
   const getMealPlanDay = (day, mealPlan) => {
-    return mealPlan.filter(planDay => planDay.day === day);
+    return mealPlan.find(planDay => planDay.day === day);
   }
   
     // when determining if meal item is breakfast/lunch/dinner, the index needs to be divisible by 7
@@ -26,14 +26,13 @@ function MealCalendar() {
     }
 
   const getSlotData = (dayIndex, planDay) => {
-    // console.log(planDay);
     switch (offsetIndex(dayIndex, planDay.day) / 7) {
       case 0:
         return { items: planDay.items.filter(item => item.slot === 1), type: "meals" };
       case 1:
         return { items: planDay.items.filter(item => item.slot === 2), type: "meals" };
       case 2:
-        return { items: planDay.items.filter(item => item.slot === 2), type: "meals" };
+        return { items: planDay.items.filter(item => item.slot === 3), type: "meals" };
       case 3:
         const filteredNutrientsArray = planDay.nutritionSummary.nutrients.filter(nutrient => 
           nutrient.name === "Calories" || nutrient.name === "Fat" || nutrient.name === "Calories" || nutrient.name === "Protein" || nutrient.name === "Carbohydrates");
@@ -42,19 +41,17 @@ function MealCalendar() {
         return null;      
     }
   }
-
   return (
-      mealPlan === [] ?
-      <div>No Data</div> :
-      <CalendarContainer>
-        {new Array(28).fill().map((_, index) => {
-            const weekday = weekdayArray[index % 7];
-            console.log(mealPlan);
-            const mealPlanDay = getMealPlanDay(weekday, mealPlan);
-            const slotData = getSlotData(index, mealPlanDay);
-            return <MealSlot slotData={slotData} />
-        })}
-      </CalendarContainer>  
+    mealPlan.length === 0 ?
+    <div>No Data</div> :
+    <CalendarContainer>
+      {new Array(28).fill().map((_, index) => {
+          const weekday = weekdayArray[index % 7];
+          const mealPlanDay = getMealPlanDay(weekday, mealPlan);
+          const slotData = mealPlanDay ? getSlotData(index, mealPlanDay) : 'No Data';
+          return <MealSlot slotData={slotData} />
+      })}
+    </CalendarContainer>  
   )
 }
 
