@@ -13,6 +13,11 @@
   }
 }
 
+.scroll {
+  border-radius: 50%;
+  width: 150px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -3,6 +3,10 @@ import {Link} from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import { Center, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import Breakfast from './pages/Breakfast';
+import Lunch from './pages/Lunch';
+import Dinner from './pages/Dinner';
+import Dessert from './pages/Dessert';
 
 function App() {
   return (
@@ -28,6 +32,11 @@ function App() {
 </nav>
 <Routes>
   <Route path="/home" element={<Home />} />
+  <Route path="/breakfast" element={<Breakfast />} />
+  <Route path="/lunch" element={<Lunch />} />
+  <Route path="/dinner" element={<Dinner />} />
+  <Route path="/dessert" element={<Dessert />} />
+
 </Routes>
     </div>
   );
