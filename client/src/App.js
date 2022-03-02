@@ -1,5 +1,7 @@
-import { Route, Routes } from 'react-router';
-import { Link } from 'react-router-dom';
+
+import MealCalendar from './components/meal_calendar/MealCalendar';
+import {Route, Routes} from 'react-router';
+import {Link} from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import { Center, IconButton, Menu, MenuButton, MenuItem, MenuList, Show, Box } from '@chakra-ui/react';
@@ -30,6 +32,9 @@ function App() {
                   <Link to="/home">Home</Link>
                 </MenuItem>
                 <MenuItem>
+                <Link to="/meal-planner">Meal Planner</Link>
+                </MenuItem>  
+                <MenuItem>
                   <Link to="/register">Register</Link>
                 </MenuItem>
               </MenuList>
@@ -41,6 +46,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/meal-planner" element={<MealCalendar />} />
       </Routes>
     </div >
   );
