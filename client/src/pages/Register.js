@@ -21,55 +21,58 @@ function Register() {
     const [phoneNumber, setPhoneNumber] = useState('')
     const [error, setError] = useState('')
     //send get request to our database send our username and email to spoonacular post then patch with spoonacular info
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
-        // axios.post('https://api.spoonacular.com/users/connect', {
-        //     username,
-        //     firstName,
-        //     lastName,
-        //     email
+        const postObject ={username, firstName, lastName, email}
+        axios.post('https://api.spoonacular.com/users/connect?apiKey=c45e6cbe895742f6a43c5da049a3f77c', postObject)
+            .then(async res => {
+                const userData = {
+                    ...postObject,
+                    spoonacularUsername:res.data.username, 
+                    spoonacularHash: res.data.hash,
+                    password,
+                    phoneNumber,
+
+                }
+                axios.post('/api/v1/users/register', userData)
+                    .then (res => {
+                        console.log(res)
+                    })
+                
+            })
             
-        // }).then(res => {
-        //     axios.post('/api/v1/users/register', {
+       
+        // fetch('/api/v1/users/register', {
+        //     method: 'POST',
+        //     body: JSON.stringify({
         //         username,
         //         firstName,
         //         lastName,
         //         email,
         //         password,
-        //         phoneNumber 
+        //         phoneNumber
+        //     }),
+        //     headers: {
+        //         'Content-Type': 'application/json'
         //     }
-        // }) 
-        fetch('/api/v1/users/register', {
-            method: 'POST',
-            body: JSON.stringify({
-                username,
-                firstName,
-                lastName,
-                email,
-                password,
-                phoneNumber
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(async res => {
-                if (res.ok) {
-                    setUsername('')
-                    setFirstName('')
-                    setLastName('')
-                    setEmail('')
-                    setPassword('')
-                    setPhoneNumber('')
-                } else {
-                    throw await res.json()
-                }
+        // })
+        //     .then(async res => {
+        //         if (res.ok) {
+        //             setUsername('')
+        //             setFirstName('')
+        //             setLastName('')
+        //             setEmail('')
+        //             setPassword('')
+        //             setPhoneNumber('')
+        //         } else {
+        //             throw await res.json()
+        //         }
 
-            })
-            .catch(res => {
-                console.log(res)
-                setError(res.error)
-            })
+        //     })
+        //     .catch(res => {
+        //         console.log(res)
+        //         setError(res.error)
+        //     })
 
     }
 
