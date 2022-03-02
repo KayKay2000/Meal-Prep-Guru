@@ -10,20 +10,17 @@ export default function Home() {
   const [category, setCategory] = useState([])
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = () => {
-    const data = menuItem.map((item) => {
-      return axios.get(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${item.searchParam}`)
-        .then((res) => {
-          return res.data.recipes[0]
-        })     
-    })
+    const fetchImage = async (category) => {
+      let response = await axios.get(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${category}`);
+      return response.data.recipes[0].image ? response.data.recipes[0] : fetchImage(category);
+    }
+    
+    const data = menuItem.map(item => fetchImage(item.searchParam));
     Promise.all(data).then(categories => {
       setCategory(categories)
     })  
-  }
+  }, []);
+  
 
   if (!category.length) {
     return null
