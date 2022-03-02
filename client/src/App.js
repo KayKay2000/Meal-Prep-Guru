@@ -4,7 +4,11 @@ import {Route, Routes} from 'react-router';
 import {Link} from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
-import { Center, IconButton, Menu, MenuButton, MenuItem, MenuList, Show, Box } from '@chakra-ui/react';
+import { Box, Center, IconButton, Menu, MenuButton, MenuItem, MenuList, Show } from '@chakra-ui/react';
+import Breakfast from './pages/Breakfast';
+import Lunch from './pages/Lunch';
+import Dinner from './pages/Dinner';
+import Dessert from './pages/Dessert';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
 
@@ -47,6 +51,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/meal-planner" element={<MealCalendar />} />
+        <Route path="/breakfast" element={<Breakfast />} />
+  <Route path="/lunch" element={<Lunch />} />
+  <Route path="/dinner" element={<Dinner />} />
+  <Route path="/dessert" element={<Dessert />} />
       </Routes>
     </div >
   );
