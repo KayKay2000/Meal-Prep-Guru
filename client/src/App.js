@@ -1,3 +1,5 @@
+
+import MealCalendar from './components/meal_calendar/MealCalendar';
 import {Route, Routes} from 'react-router';
 import {Link} from 'react-router-dom';
 import './App.css';
@@ -22,12 +24,17 @@ function App() {
    >Main Menu </MenuButton>
   <MenuList>
     <MenuItem>
-    <Link to="/home">Home</Link>    </MenuItem>
+      <Link to="/home">Home</Link>    
+    </MenuItem>
+    <MenuItem>
+      <Link to="/meal-planner">Meal Planner</Link>    
+    </MenuItem>
   </MenuList>
 </Menu>
 </nav>
 <Routes>
   <Route path="/home" element={<Home />} />
+  <Route path="/meal-planner" element={<MealCalendar />} />
 </Routes>
     </div>
   );

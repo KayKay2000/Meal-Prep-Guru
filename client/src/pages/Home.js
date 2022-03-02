@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Box, Center, Flex, Image, Text } from '@chakra-ui/react';
 import { menuItem } from '../data/mainMenuCategory';
-const apiKey = "c5a4ee3624054a2f93c00963c21685f8";
+const apiKey = "933bd795ebbc44218ff61f94fb6e3575";
 
 
 export default function Home() {
@@ -10,20 +10,17 @@ export default function Home() {
   const [name, setName] = useState([])
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = () => {
-    const data = menuItem.map((item) => {
-      return axios.get(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${item.searchParam}`)
-        .then((res) => {
-          return res.data.recipes[0]
-        })     
-    })
+    const fetchImage = async (category) => {
+      let response = await axios.get(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${category}`);
+      return response.data.recipes[0].image ? response.data.recipes[0] : fetchImage(category);
+    }
+    
+    const data = menuItem.map(item => fetchImage(item.searchParam));
     Promise.all(data).then(categories => {
       setCategory(categories)
     })  
-  }
+  }, []);
+  
 
   if (!category.length) {
     return null
