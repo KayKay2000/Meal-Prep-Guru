@@ -41,3 +41,85 @@
     transform: rotate(360deg);
   }
 }
+.parent {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+.leftSide {
+  background-color: blue;
+  width: 55vw;
+  /* position: absolute; */
+}
+.leftSide img {
+  height: 100%;
+  width: 100%;
+  
+}
+.rightSide {
+  background-color: black;
+  color: whitesmoke;
+  width: 45vw;
+  /* position: absolute; */
+}
+.logo {
+  font-family:fantasy; 
+  font-weight:bold;
+}
+.signUpForm {
+  width: 70%;
+  margin-left: 2%;
+}
+.join {
+  text-align: left;
+}
+.features{
+  display: flex;
+  justify-content: space-around;
+}
+.discover {
+  width: 15%;
+}
+.favorites {
+  width: 15%;
+}
+.mealPlan {
+  width: 15%;
+}
+.signInButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 2%;
+}
+.join {
+  margin-left: 2%;
+}
+.member {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 2%;
+}
+.signInBackground {
+  background-color: rgb(38, 45, 51);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signIn {
+  /* background-color: rgb(1, 0, 0); */
+  /* width: 40vw; */
+  /* border-radius: 5%; */
+  color: white;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 5%;
+  padding-bottom: 10%;
+}
+.modal {
+  background-color: rgb(1, 0, 0);
+  border-radius: 5%;
+  width: 40vw;
+  box-shadow:  4px 10px 30px white;
+}
