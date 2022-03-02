@@ -16,9 +16,10 @@ export default function RecipeResults() {
     size='xl'
   />
     )}
+    
   return (
 <div>
-      <SimpleGrid columns={{ sm: 1, md: 3, lg: 4 }}>
+      <SimpleGrid mx={5} gap={5} columns={{ sm: 1, md: 2, lg: 3 }}>
         {results.map(recipe => {
           return <Box key={recipe.id}><RecipeCard key={recipe.id} recipe={recipe} /></Box>
         })}

@@ -21,7 +21,7 @@ export default function AllergiesSearch() {
             <Heading as='h6' size='md' p={5} textDecoration='underline'>
     Allergies
   </Heading>
-      <SimpleGrid spacing={5} columns={{ sm: 2, md: 3, lg: 4 }}>
+      <SimpleGrid spacingX={10} columns={{ sm: 2, md: 2, lg: 3 }}>
         {intolerances.map((intolerance) => {
           return (
             <Checkbox key={intolerance.id} colorScheme='red' id={intolerance.type} name={intolerance.type} onChange={(e) => handleChangeAllergy(intolerance.type, e.target.checked)} value={intolerance.type}>

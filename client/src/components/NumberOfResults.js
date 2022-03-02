@@ -17,7 +17,7 @@ export default function NumberOfResults() {
         <option>1</option>
         <option>5</option>
         <option>10</option>
-        <option>15</option>
+        <option>30</option>
         </Select><br />
     </div>
   )

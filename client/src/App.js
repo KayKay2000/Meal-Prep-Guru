@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <Center p={10}>
-    <img src='https://see.fontimg.com/api/renderfont4/83GA/eyJyIjoiZnMiLCJoIjoxMTEsInciOjEyNTAsImZzIjo4OSwiZmdjIjoiIzAwMDAwMCIsImJnYyI6IiNGRkZGRkYiLCJ0IjoxfQ/V2hhdCdzIEZvciBEaW5uZXIgPyA/rolleteqaku-regular.png' alt='whats for dinner'/>
+    <img src='https://see.fontimg.com/api/renderfont4/ALEmp/eyJyIjoiZnMiLCJoIjo3MywidyI6MTI1MCwiZnMiOjU4LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/TWVhbCBQbGFuIEd1cnU/mandhor.png' alt='meal plan guru logo'/>
   </Center>
 <nav>
 <Menu>
