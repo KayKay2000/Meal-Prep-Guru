@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Tacos from '../img/birria-tacos.webp'
+import { useNavigate } from 'react-router';
 import '../App.css'
 import {
     FormControl,
@@ -13,6 +14,7 @@ import {
 import axios from 'axios';
 
 function Register() {
+    const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -20,7 +22,6 @@ function Register() {
     const [password, setPassword] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [error, setError] = useState('')
-    //send get request to our database send our username and email to spoonacular post then patch with spoonacular info
     const handleSubmit = async(e) => {
         e.preventDefault()
         const postObject ={username, firstName, lastName, email}
@@ -37,42 +38,13 @@ function Register() {
                 axios.post('/api/v1/users/register', userData)
                     .then (res => {
                         console.log(res)
+                        navigate('/Sign-in')
                     })
                 
             })
             
        
-        // fetch('/api/v1/users/register', {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         username,
-        //         firstName,
-        //         lastName,
-        //         email,
-        //         password,
-        //         phoneNumber
-        //     }),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-        //     .then(async res => {
-        //         if (res.ok) {
-        //             setUsername('')
-        //             setFirstName('')
-        //             setLastName('')
-        //             setEmail('')
-        //             setPassword('')
-        //             setPhoneNumber('')
-        //         } else {
-        //             throw await res.json()
-        //         }
-
-        //     })
-        //     .catch(res => {
-        //         console.log(res)
-        //         setError(res.error)
-        //     })
+        //
 
     }
 

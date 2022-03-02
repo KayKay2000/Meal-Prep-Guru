@@ -79,12 +79,18 @@
 }
 .discover {
   width: 15%;
+  border: outset;
+  border-color: whitesmoke;
 }
 .favorites {
   width: 15%;
+  border: outset;
+  border-color: whitesmoke;
 }
 .mealPlan {
   width: 15%;
+  border: outset;
+  border-color: whitesmoke;
 }
 .signInButton {
   display: flex;
