@@ -44,15 +44,18 @@
 .leftSide {
   background-color: blue;
   width: 55vw;
+  /* position: absolute; */
 }
 .leftSide img {
   height: 100%;
   width: 100%;
+  
 }
 .rightSide {
   background-color: black;
   color: whitesmoke;
   width: 45vw;
+  /* position: absolute; */
 }
 .logo {
   font-family:fantasy; 

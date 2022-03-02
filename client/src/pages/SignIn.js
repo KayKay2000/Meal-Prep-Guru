@@ -20,7 +20,7 @@ function SignIn() {
         <CloseButton color='white' pt={2} pl={2} />
         </Link>
         <div className='signIn'>
-        <Heading as='h2' size='lg' className='join'>Sign In To Meal Plan Guru.</Heading>
+        <Heading as='h2' size='lg' className='join'>Sign In To Meal Prep Guru.</Heading>
             <br /> <br/>
             <FormControl isRequired>
                 <FormLabel htmlFor='username'>Username</FormLabel>
