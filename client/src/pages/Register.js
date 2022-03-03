@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import Tacos from '../img/birria-tacos.webp'
+import Tacos from '../img/birria-tacos.webp';
+import Glass from '../img/mag-glass.svg';
+import Heart from '../img/heart.svg';
+import Calendar from '../img/calendar.svg';
+import { useNavigate } from 'react-router';
 import '../App.css'
 import {
     FormControl,
     FormLabel,
     Button,
-    ButtonGroup,
     Input,
     Heading
 } from '@chakra-ui/react'
 import axios from 'axios';
 
 function Register() {
+    const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -20,7 +24,6 @@ function Register() {
     const [password, setPassword] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [error, setError] = useState('')
-    //send get request to our database send our username and email to spoonacular post then patch with spoonacular info
     const handleSubmit = async(e) => {
         e.preventDefault()
         const postObject ={username, firstName, lastName, email}
@@ -37,44 +40,11 @@ function Register() {
                 axios.post('/api/v1/users/register', userData)
                     .then (res => {
                         console.log(res)
+                        navigate('/Sign-in')
                     })
                 
             })
-            
-       
-        // fetch('/api/v1/users/register', {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         username,
-        //         firstName,
-        //         lastName,
-        //         email,
-        //         password,
-        //         phoneNumber
-        //     }),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-        //     .then(async res => {
-        //         if (res.ok) {
-        //             setUsername('')
-        //             setFirstName('')
-        //             setLastName('')
-        //             setEmail('')
-        //             setPassword('')
-        //             setPhoneNumber('')
-        //         } else {
-        //             throw await res.json()
-        //         }
-
-        //     })
-        //     .catch(res => {
-        //         console.log(res)
-        //         setError(res.error)
-        //     })
-
-    }
+        }
 
 return (
     <div className='parent'>
@@ -85,9 +55,9 @@ return (
             <Heading as='h2' size='2xl' isTruncated className='logo' fontFamily='fantasy' pt='10'>Meal Prep Guru</Heading>
             <br />
             <div className='features'>
-                <div className='discover'>Discover new recipes</div>
-                <div className='favorites'>Add them to your favorites</div>
-                <div className='mealPlan'>Make your own meal plan</div>
+                <div className='discover'><img src={Glass} alt="magnifying glass" width={35}/>Discover new recipes</div>
+                <div className='favorites'><img src={Heart} alt="plus sign" width={35}/>Add them to your favorites</div>
+                <div className='mealPlan'><img src={Calendar} alt="calendar" width={35}/>Make your own meal plan</div>
             </div>
             <br />
             <Heading as='h2' size='md' className='join'>Join MPG Today.</Heading>
@@ -128,10 +98,8 @@ return (
                         Register
                     </Button>
                 </form>
-
-
             </div>
-            <br /><br />
+            <br />
             <div >
                 <div className='member'> Already a member?</div>
                 <Link to="/Sign-In" className='signInButton'>
@@ -143,8 +111,7 @@ return (
                         colorScheme='black'
                         borderRadius={70}
                         color='blue'
-
-                    >
+                        >
                         Sign In
                     </Button>
                 </Link>

@@ -2,55 +2,17 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.scroll {
-  border-radius: 50%;
-  width: 150px;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 .parent {
   display: flex;
   justify-content: space-between;
   height: 100vh;
 }
 .leftSide {
-  background-color: blue;
+  background-color: black;
   width: 55vw;
-  /* position: absolute; */
+  /* height: 116.9vh */
 }
+
 .leftSide img {
   height: 100%;
   width: 100%;
@@ -60,7 +22,7 @@
   background-color: black;
   color: whitesmoke;
   width: 45vw;
-  /* position: absolute; */
+  height:max-content;
 }
 .logo {
   font-family:fantasy; 
@@ -79,12 +41,21 @@
 }
 .discover {
   width: 15%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .favorites {
   width: 15%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .mealPlan {
   width: 15%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .signInButton {
   display: flex;
@@ -108,9 +79,6 @@
   align-items: center;
 }
 .signIn {
-  /* background-color: rgb(1, 0, 0); */
-  /* width: 40vw; */
-  /* border-radius: 5%; */
   color: white;
   padding-left: 10%;
   padding-right: 10%;
@@ -122,4 +90,35 @@
   border-radius: 5%;
   width: 40vw;
   box-shadow:  4px 10px 30px white;
+}
+
+@media screen and (max-device-width: 820px) and (orientation: portrait){
+  .leftSide {
+    height:100vh;
+  }
+  .rightSide {
+    height: auto;
+  }
+}
+@media screen and (max-device-width: 1180px) and (orientation: landscape){
+  .leftSide {
+    height:106vh;
+  }
+  .rightSide {
+    height:fit-content;
+  }
+}
+@media screen and (max-device-width: 906px) and (orientation: landscape){
+  .leftSide {
+    height: 117vh;
+  }
+} 
+@media screen and (max-device-width: 390px) and (orientation: portrait){
+  .leftSide {
+    display: none;
+  }
+  .rightSide {
+    width: auto;
+    height:max-content;
+  }
 }
