@@ -45,7 +45,7 @@ function SignIn() {
                     setError('')
                     dispatch(loggedIn(data))
                     dispatch(fetchFavorites)
-                    navigate('/')
+                    navigate('/home')
                 } else {
                     throw data
                 }
@@ -59,7 +59,7 @@ function SignIn() {
         <div className='signInBackground'>
 
             <div className='modal'>
-                <Link to="/register">
+                <Link to="/">
                     <CloseButton color='white' pt={2} pl={2} />
                 </Link>
                 <div className='signIn'>
