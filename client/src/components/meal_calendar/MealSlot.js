@@ -20,10 +20,11 @@ function MealSlot(props) {
 }
 
 const SlotContainer = styled.div`
-    width: 10vw;
-    height: 10vw;
+    width: 13vw;
+    height: 10vh;
     border-style: solid;
     font-size: .5vw;
+    border-width: 1px;
 `
 
 export default MealSlot
