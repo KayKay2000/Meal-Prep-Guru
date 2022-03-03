@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import Tacos from '../img/birria-tacos.webp'
+import Tacos from '../img/birria-tacos.webp';
+import Glass from '../img/mag-glass.svg';
+import Heart from '../img/heart.svg';
+import Calendar from '../img/calendar.svg';
 import { useNavigate } from 'react-router';
 import '../App.css'
 import {
     FormControl,
     FormLabel,
     Button,
-    ButtonGroup,
     Input,
     Heading
 } from '@chakra-ui/react'
@@ -42,11 +44,7 @@ function Register() {
                     })
                 
             })
-            
-       
-        //
-
-    }
+        }
 
 return (
     <div className='parent'>
@@ -57,9 +55,9 @@ return (
             <Heading as='h2' size='2xl' isTruncated className='logo' fontFamily='fantasy' pt='10'>Meal Prep Guru</Heading>
             <br />
             <div className='features'>
-                <div className='discover'>Discover new recipes</div>
-                <div className='favorites'>Add them to your favorites</div>
-                <div className='mealPlan'>Make your own meal plan</div>
+                <div className='discover'><img src={Glass} alt="magnifying glass" width={35}/>Discover new recipes</div>
+                <div className='favorites'><img src={Heart} alt="plus sign" width={35}/>Add them to your favorites</div>
+                <div className='mealPlan'><img src={Calendar} alt="calendar" width={35}/>Make your own meal plan</div>
             </div>
             <br />
             <Heading as='h2' size='md' className='join'>Join MPG Today.</Heading>
@@ -100,10 +98,8 @@ return (
                         Register
                     </Button>
                 </form>
-
-
             </div>
-            <br /><br />
+            <br />
             <div >
                 <div className='member'> Already a member?</div>
                 <Link to="/Sign-In" className='signInButton'>
@@ -115,8 +111,7 @@ return (
                         colorScheme='black'
                         borderRadius={70}
                         color='blue'
-
-                    >
+                        >
                         Sign In
                     </Button>
                 </Link>
