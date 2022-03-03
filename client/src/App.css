@@ -24,10 +24,6 @@
   width: 45vw;
   height:max-content;
 }
-.logo {
-  font-family:fantasy; 
-  font-weight:bold;
-}
 .signUpForm {
   width: 70%;
   margin-left: 2%;
@@ -123,3 +119,17 @@
   }
 }
 
+.hide {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-content: center;
+  position: sticky;
+}
+nav{
+  width:85vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

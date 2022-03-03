@@ -1,12 +1,12 @@
 
 import MealCalendar from './components/meal_calendar/MealCalendar';
-import {Route, Routes} from 'react-router';
+import {Navigate, Route, Routes, useNavigate} from 'react-router';
 import {Link} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
 import Home from './pages/Home';
 import { logout } from './redux/reducers/userReducer';
-import { Button, Center, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Button, Center, IconButton, Menu, MenuButton, MenuItem, MenuList, Heading } from '@chakra-ui/react';
 import Breakfast from './pages/Breakfast';
 import Lunch from './pages/Lunch';
 import Dinner from './pages/Dinner';
@@ -16,39 +16,28 @@ import SignIn from './pages/SignIn';
 
 function App() {
   const currentUser = useSelector(state => state.user.currentUser)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   console.log(currentUser)
   const handleLogout = () => {
     dispatch(logout)
+    navigate('/')
   }
 
   return (
     <div className="App">
-        { currentUser && <div className='hide'>
-          <Center p={10}>
-            <img src='https://see.fontimg.com/api/renderfont4/83GA/eyJyIjoiZnMiLCJoIjoxMTEsInciOjEyNTAsImZzIjo4OSwiZmdjIjoiIzAwMDAwMCIsImJnYyI6IiNGRkZGRkYiLCJ0IjoxfQ/V2hhdCdzIEZvciBEaW5uZXIgPyA/rolleteqaku-regular.png' alt='whats for dinner' />
-          </Center>
+        { currentUser && 
+        <div className='hide'>
+          <Heading as='h2' size='lg'  className='logo' fontFamily='fantasy' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}>Meal Prep Guru</Heading>
           <nav>
-            <Menu>
-              <MenuButton
-                as={IconButton}
-                aria-label='Options'
-                variant='outline'
-                borderColor={'black'}
-                m={5}
-                p={5}
-              >Main Menu </MenuButton>
-              <MenuList>
-                <MenuItem>
-                  <Link to="/home">Home</Link>
-                </MenuItem>
-                <MenuItem>
-                <Link to="/meal-planner">Meal Planner</Link>
-                </MenuItem>  
-              </MenuList>
-            </Menu>
+                  <Link to="/recipes">Recipes</Link>
+                  <Link to="/meal-planner">Meal Planner</Link>
+                  <Link to="/favorites">Favorites</Link>
+                  <Link to="/profile">Profile</Link>
+          <div className='loginCredentials'>
             <div>Hello, {currentUser.username}</div>
               <Button onClick={handleLogout} colorScheme="blue" variant='link'>Logout</Button>
+            </div>
           </nav>
           </div>}
       <Routes>
@@ -60,6 +49,8 @@ function App() {
         <Route path="/lunch" element={<Lunch />} />
         <Route path="/dinner" element={<Dinner />} />
         <Route path="/dessert" element={<Dessert />} />
+        {/* <Route path="/favorites" element={<Favorites />} />
+        <Route path="/profile" element={<Profile />} /> */}
       </Routes>
     </div >
   );
