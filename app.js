@@ -11,6 +11,7 @@ const SequelizeSession = require('connect-session-sequelize')(session.Store)
 const store = new SequelizeSession({ db: db.sequelize })
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/api/users');
+const favoritesRouter = require('./routes/api/favorites');
 const cors = require("cors");
 
 const app = express();
@@ -41,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/favorites', favoritesRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

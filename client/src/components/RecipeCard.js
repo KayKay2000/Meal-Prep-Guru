@@ -1,35 +1,50 @@
 import { Box, Image, Badge, Text, Stack, Button, Collapse, Center, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { addRecipe, removeRecipe } from '../redux/reducers/favoritesReducer';
+import { addFavorite, fetchFavorites, removeFavorite } from '../redux/reducers/favoritesReducer';
 
 export default function RecipeCard(props) {
-  const { recipe } = props
+  const { favorite } = props
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites)
   const [show, setShow] = useState(false);
 
   const handleToggle = () => setShow(!show);
 
-  const handleAddRecipe = () => {
-    dispatch(addRecipe(recipe))
+  const handleAddFavorite = async () => {
+    const res = await fetch('/api/v1/favorites', {
+      method: 'POST',
+      body: JSON.stringify(favorite),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    dispatch(fetchFavorites)
   }
 
-  const handleRemoveRecipe = () => {
-    dispatch(removeRecipe(recipe))
+  const handleRemoveFavorite = async () => {
+    const res = await fetch(`/api/v1/favorites/${favorite.id}`, {
+      method: 'DELETE',
+      body: JSON.stringify(favorite),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    dispatch(fetchFavorites)
   }
 
-  const isAlreadySaved = favorites.find((savedRecipe) => {
-    return savedRecipe.id === recipe.id
+  const isAlreadySaved = favorites.find((savedFavorite) => {
+    return savedFavorite.id === favorite.id
   });
 
-  if (!recipe) {
-    return "No results, Please broaden your search!"
-  }
+  // if (!recipe) {
+  //   return "No results, Please broaden your search!"
+  // }
 
   return (
 <div>
-    <Center>
+    {/* <Center>
       <Box w="300px" rounded="20px"
         overflow="hidden" bg={'white'} mt={10}>
         <Box boxShadow='dark-lg' p='6' rounded='md' bg='white'>
@@ -86,14 +101,14 @@ export default function RecipeCard(props) {
           </Stack>
           <VStack>
             {isAlreadySaved ? (
-              <Button variant='solid' onClick={handleRemoveRecipe} colorScheme='red' size='sm' mt={5}>Remove From Favorites</Button>
+              <Button variant='solid' onClick={handleRemoveFavorite} colorScheme='red' size='sm' mt={5}>Remove From Favorites</Button>
             ) : (
-              <Button variant='solid' onClick={handleAddRecipe} colorScheme='green' size='sm' mt={5}>Add To Favorites</Button>
+              <Button variant='solid' onClick={handleAddFavorite} colorScheme='green' size='sm' mt={5}>Add To Favorites</Button>
             )}
           </VStack>
         </Box >
       </Box >
-    </Center>
+    </Center> */}
     </div>
   )
 }

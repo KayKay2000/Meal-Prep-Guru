@@ -11,8 +11,20 @@ import Dinner from './pages/Dinner';
 import Dessert from './pages/Dessert';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
+import Favorites from './pages/Favorites';
+import { fetchFavorites } from './redux/reducers/favoritesReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
 
 function App() {
+  const currentUser = useSelector(state => state.user.currentUser)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchFavorites)
+  }, [dispatch])
+
   return (
     <div className="App">
       {/* only want logged in users to see nav and Center */}
@@ -36,6 +48,9 @@ function App() {
                   <Link to="/home">Home</Link>
                 </MenuItem>
                 <MenuItem>
+                <Link to="/favorites">Favorites</Link>
+                </MenuItem>
+                <MenuItem>
                 <Link to="/meal-planner">Meal Planner</Link>
                 </MenuItem>  
                 <MenuItem>
@@ -55,6 +70,7 @@ function App() {
   <Route path="/lunch" element={<Lunch />} />
   <Route path="/dinner" element={<Dinner />} />
   <Route path="/dessert" element={<Dessert />} />
+  <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </div >
   );
