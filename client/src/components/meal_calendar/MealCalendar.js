@@ -6,24 +6,26 @@ import axios from 'axios';
 
 function MealCalendar() {
   const weekdayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const [ mealPlan, setMealPlan ] = useState([]);
-  const [ mealPlanImageObjects, setMealPlanImageObjects ] = useState({});
+  const [ plannerData, setPlannerData ] = useState({});
   useEffect(() => {
-    axios.get('https://api.spoonacular.com/mealplanner/safehaven1017/week/2022-02-28?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=c45e6cbe895742f6a43c5da049a3f77c')
+    axios.get('https://api.spoonacular.com/mealplanner/safehaven1017/week/2022-02-28?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=9cf4d082fd9f4fdb90897ddfc4582935')
     .then(res => {
-      setMealPlan(res.data.days);
+      const mealPlan = res.data.days;
       const recipeIds = []; 
       res.data.days.forEach(day => {
         day.items.forEach(item => {
           recipeIds.push(item.value.id);
         })
       })
-      axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIds.join(',')}&apiKey=c45e6cbe895742f6a43c5da049a3f77c`).then(res => {
-        const objectMap = {};
+      axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIds.join(',')}&apiKey=9cf4d082fd9f4fdb90897ddfc4582935`).then(res => {
+        const imageObjectMap = {};
         res.data.forEach(recipe => {
-          objectMap[`${recipe.id}`] = recipe;
+          imageObjectMap[`${recipe.id}`] = recipe;
         })
-        setMealPlanImageObjects(objectMap);
+        setPlannerData({
+          mealPlan,
+          imageObjectMap
+        });
       })
     })
   }, [])
@@ -58,22 +60,22 @@ function MealCalendar() {
 
   return (
     <PageContainer>
-      {/* mealPlan.length === 0 ?
-      <div>No Data</div> : */}
+      {Object.keys(plannerData).length === 0 ?
+      <div>No Data</div> : (
       <CalendarContainer>
         {new Array(28).fill().map((_, index) => {
             const weekday = weekdayArray[index % 7];
-            const mealPlanDay = getMealPlanDay(weekday, mealPlan);
-            const slotData = mealPlanDay ? getSlotData(index, mealPlanDay) : 'No Data';
+            const mealPlanDay = getMealPlanDay(weekday, plannerData.mealPlan);
+            const slotData = mealPlanDay ? getSlotData(index, mealPlanDay) : '';
             if (slotData.type === 'meals') {
               slotData.items.forEach(item => {
-                item.imageLink = mealPlanImageObjects[`${item.value.id}`].image;
+                item.imageLink = plannerData.imageObjectMap[`${item.value.id}`];
               })
             }
-            // const slotData = 'No Data';
             return <MealSlot slotData={slotData} key={index} />
         })}
-      </CalendarContainer>  
+      </CalendarContainer> )
+      }  
     </PageContainer>
   )
 }
@@ -84,8 +86,7 @@ const CalendarContainer = styled.div`
   margin: 5vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  border-width: 3px;
-  box-shadow: 0px 0px 10px 1px #00000030;
+  box-shadow: 0px 0px .4vh .1vh #00000030;
 `
 
 const PageContainer = styled.div`
