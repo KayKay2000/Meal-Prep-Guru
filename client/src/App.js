@@ -13,11 +13,19 @@ import Dinner from './pages/Dinner';
 import Dessert from './pages/Dessert';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
+import Favorites from './pages/Favorites';
+import { fetchFavorites } from './redux/reducers/favoritesReducer';
+import { useEffect } from 'react';
+
 
 function App() {
   const currentUser = useSelector(state => state.user.currentUser)
   const dispatch = useDispatch()
-  console.log(currentUser)
+
+  useEffect(() => {
+    dispatch(fetchFavorites)
+  }, [dispatch])
+
   const handleLogout = () => {
     dispatch(logout)
   }
@@ -43,6 +51,9 @@ function App() {
                   <Link to="/home">Home</Link>
                 </MenuItem>
                 <MenuItem>
+                <Link to="/favorites">Favorites</Link>
+                </MenuItem>
+                <MenuItem>
                 <Link to="/meal-planner">Meal Planner</Link>
                 </MenuItem>  
               </MenuList>
@@ -57,9 +68,10 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/meal-planner" element={<MealCalendar />} />
         <Route path="/breakfast" element={<Breakfast />} />
-        <Route path="/lunch" element={<Lunch />} />
-        <Route path="/dinner" element={<Dinner />} />
-        <Route path="/dessert" element={<Dessert />} />
+  <Route path="/lunch" element={<Lunch />} />
+  <Route path="/dinner" element={<Dinner />} />
+  <Route path="/dessert" element={<Dessert />} />
+  <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </div >
   );

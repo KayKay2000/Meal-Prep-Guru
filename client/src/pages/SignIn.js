@@ -13,6 +13,7 @@ import {
     Alert,
     AlertIcon
 } from '@chakra-ui/react'
+import { fetchFavorites } from '../redux/reducers/favoritesReducer'
 
 
 function SignIn() {
@@ -43,6 +44,7 @@ function SignIn() {
                     setPassword('')
                     setError('')
                     dispatch(loggedIn(data))
+                    dispatch(fetchFavorites)
                     navigate('/home')
                 } else {
                     throw data
