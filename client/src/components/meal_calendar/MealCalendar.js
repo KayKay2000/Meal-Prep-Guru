@@ -9,6 +9,8 @@ function MealCalendar() {
   const weekdayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const [ plannerData, setPlannerData ] = useState({});
   const apiKey = '68389b1f8db2442ab7f2595d12160698'
+
+  // fetching the user's current meal planner, then fetching the individual recipes for said meal planner to get image data
   useEffect(() => {
     axios.get(`https://api.spoonacular.com/mealplanner/safehaven1017/week/2022-02-28?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`)
     .then(res => {
@@ -62,28 +64,29 @@ function MealCalendar() {
 
   return (
     <PageContainer>
-      <DayAndGridContainer>
-        <DaysContainer>
-          {new Array(7).fill().map((_, index) => <Day key={index} >{weekdayArray[index].toLocaleUpperCase()}</Day>)}
-        </DaysContainer>
-        {
-          Object.keys(plannerData).length === 0 ?
-          <Spinner size='xl' /> : (
-          <Grid>
-            {new Array(28).fill().map((_, index) => {
-                const weekday = weekdayArray[index % 7];
-                const mealPlanDay = getMealPlanDay(weekday, plannerData.mealPlan);
-                const slotData = mealPlanDay ? getSlotData(index, mealPlanDay) : '';
-                if (slotData.type === 'meals') {
-                  slotData.items.forEach(item => {
-                    item.imageLink = plannerData.imageObjectMap[`${item.value.id}`];
-                  })
-                }
-                return <MealSlot slotData={slotData} index={index} key={index} />
-            })}
-          </Grid> )
-        }  
-      </DayAndGridContainer>
+      {
+        Object.keys(plannerData).length === 0 ?
+          <Spinner style={{marginTop: '-50vw'}} size='xl' /> 
+          :
+          <DayAndGridContainer>
+            <DaysContainer>
+              {new Array(7).fill().map((_, index) => <Day key={index} >{weekdayArray[index].toLocaleUpperCase()}</Day>)}
+            </DaysContainer> 
+              <Grid>
+                {new Array(28).fill().map((_, index) => {
+                    const weekday = weekdayArray[index % 7];
+                    const mealPlanDay = getMealPlanDay(weekday, plannerData.mealPlan);
+                    const slotData = mealPlanDay ? getSlotData(index, mealPlanDay) : '';
+                    if (slotData.type === 'meals') {
+                      slotData.items.forEach(item => {
+                        item.imageLink = plannerData.imageObjectMap[`${item.value.id}`];
+                      })
+                    }
+                    return <MealSlot slotData={slotData} index={index} key={index} />
+                })}
+              </Grid>  
+          </DayAndGridContainer>
+      }
     </PageContainer>
   )
 }
