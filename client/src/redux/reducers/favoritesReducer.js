@@ -33,7 +33,7 @@ export function fetchFavorites(dispatch, getState) {
   fetch('/api/v1/favorites')
   .then(res => res.json())
   .then(favorites => {
-    dispatch(setFavorites(favorites))
+    dispatch(setFavorites(favorites || []))
   })
 }
 

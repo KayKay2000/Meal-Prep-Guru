@@ -34,7 +34,7 @@ router.delete('/:recipeID', checkAuth, async (req, res) => {
   const favorite = await db.Favorite.findOne({
     where: {
       UserId: req.session.user.id,
-      recipeID: req.params.id
+      recipeID: req.params.recipeID
     },
   })
   // if no favorite, 404

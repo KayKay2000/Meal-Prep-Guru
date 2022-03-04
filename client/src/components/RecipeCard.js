@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addFavorite, fetchFavorites, removeFavorite } from '../redux/reducers/favoritesReducer';
 
 export default function RecipeCard(props) {
-  const { favorite } = props
+  const { recipe } = props
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites)
   const [show, setShow] = useState(false);
@@ -14,7 +14,7 @@ export default function RecipeCard(props) {
   const handleAddFavorite = async () => {
     const res = await fetch('/api/v1/favorites', {
       method: 'POST',
-      body: JSON.stringify(favorite),
+      body: JSON.stringify(recipe),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -23,9 +23,9 @@ export default function RecipeCard(props) {
   }
 
   const handleRemoveFavorite = async () => {
-    const res = await fetch(`/api/v1/favorites/${favorite.id}`, {
+    const res = await fetch(`/api/v1/favorites/${recipe.id}`, {
       method: 'DELETE',
-      body: JSON.stringify(favorite),
+      body: JSON.stringify(recipe),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -35,16 +35,16 @@ export default function RecipeCard(props) {
   }
 
   const isAlreadySaved = favorites.find((savedFavorite) => {
-    return savedFavorite.id === favorite.id
+    return savedFavorite.recipeID === recipe.id
   });
 
-  // if (!recipe) {
-  //   return "No results, Please broaden your search!"
-  // }
-
+  if (!recipe) {
+    return "No results, Please broaden your search!"
+  }
+// console.log(recipe)
   return (
 <div>
-    {/* <Center>
+    <Center>
       <Box w="300px" rounded="20px"
         overflow="hidden" bg={'white'} mt={10}>
         <Box boxShadow='dark-lg' p='6' rounded='md' bg='white'>
@@ -108,7 +108,7 @@ export default function RecipeCard(props) {
           </VStack>
         </Box >
       </Box >
-    </Center> */}
+    </Center>
     </div>
   )
 }
