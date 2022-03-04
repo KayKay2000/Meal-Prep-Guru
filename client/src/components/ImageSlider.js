@@ -4,7 +4,7 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import { cuisines } from '../data/cuisines';
 import axios from 'axios'
 const apiKey = "933bd795ebbc44218ff61f94fb6e3575";
-
+const apiKey2 = '2006cf2c3e4c4763861230ad68a14371';
 
 export default function ImageSlider() {
 

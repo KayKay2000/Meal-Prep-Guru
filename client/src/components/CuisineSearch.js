@@ -13,9 +13,9 @@ const setCuisine = (value) => {
 }
 
   return (
-    <div>
-      <b>Select a cuisine</b>
-      <Select value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
+    <div className='option'>
+      Select a cuisine
+      <Select value={cuisine} onChange={(e) => setCuisine(e.target.value)} color='white'>
         <option value="">All</option>
         {cuisines.map((cuisine) => {
           return <option key={cuisine.id}>{cuisine.cuisine}</option>

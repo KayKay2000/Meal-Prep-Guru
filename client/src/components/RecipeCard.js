@@ -45,28 +45,35 @@ export default function RecipeCard(props) {
   return (
 <div>
     <Center>
-      <Box w="300px" rounded="20px"
-        overflow="hidden" bg={'white'} mt={10}>
-        <Box boxShadow='dark-lg' p='6' rounded='md' bg='white'>
+      <Box w="300px" rounded="20px" 
+        overflow="hidden" bg={'black'} mt={10} >
+        <Box p='6' rounded='md' bg='black' border='solid' borderColor='white' borderWidth='thin' >
           <Image rounded='md' src={recipe.image} alt={recipe.title} boxSize="250px">
           </Image>
         </Box>
-        <Box p={5}>
-          <Stack align="center">
-            <Text as="h2" fontWeight="bold" my={2} >
+        <Box p={5} bg='black' >
+          <Stack align="center" bg='black'>
+            <Text as="h2" fontWeight="bold" my={2} color='white'>
               {recipe.title}
             </Text>
-            <Badge variant="solid" colorScheme="green"
+            <Badge variant="solid" colorScheme="blue"
                   rounded="full" px={2} m={5}>
                   Recipe Info
                 </Badge>
-                <Text pb={5}>
+                <Text pb={5} color='white'>
                   Servings : {recipe.servings}<br />
                   Price Per Serving: ${(recipe.pricePerServing / 100).toFixed(2)}<br />
                   Ready in: {recipe.readyInMinutes} minutes<br />
                   Taste Score: {recipe.spoonacularScore}%<br />
                 </Text>
-            <Button colorScheme="blue" onClick={handleToggle}>
+            <Button  size='md'
+            height='28px'
+            width='200px'
+            border='1px'
+            colorScheme='black'
+            borderRadius={70}
+            color='blue'      
+            onClick={handleToggle}>
               {show ? 'Hide' : 'Show'} Recipe
             </Button>
             <Collapse mt={4} in={show}>
@@ -78,7 +85,7 @@ export default function RecipeCard(props) {
                 <Text fontWeight="light">
                   {recipe.extendedIngredients.map((ingredient) => {
                     return <div>
-                      <Box mb={5}>
+                      <Box mb={5} color='white'>
                       <Center><Image src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`} alt={ingredient.name}></Image></Center>
                       {ingredient.name} ({ingredient.amount.toFixed(2)} {ingredient.unit})
                       </Box>
@@ -90,7 +97,7 @@ export default function RecipeCard(props) {
                   </Badge>
                   {recipe.analyzedInstructions.map((instruction) => {
                     return instruction.steps.map((step) => {
-                      return <div>
+                      return <div className="instructions">
                         <span>{step.number}. {step.step}</span><br /><br />
                       </div>
                     })
@@ -101,9 +108,27 @@ export default function RecipeCard(props) {
           </Stack>
           <VStack>
             {isAlreadySaved ? (
-              <Button variant='solid' onClick={handleRemoveFavorite} colorScheme='red' size='sm' mt={5}>Remove From Favorites</Button>
+              <Button   
+            size='md'
+            height='28px'
+            width='200px'
+            border='1px'
+            colorScheme='black'
+            borderRadius={70}
+            color='red'    
+            onClick={handleRemoveFavorite} 
+            mt={5}>Remove From Favorites</Button>
             ) : (
-              <Button variant='solid' onClick={handleAddFavorite} colorScheme='green' size='sm' mt={5}>Add To Favorites</Button>
+              <Button
+            size='md'
+            height='28px'
+            width='200px'
+            border='1px'
+            colorScheme='black'
+            borderRadius={70}
+            color='green'   
+            onClick={handleAddFavorite} 
+            mt={5}>Add To Favorites</Button>
             )}
           </VStack>
         </Box >
