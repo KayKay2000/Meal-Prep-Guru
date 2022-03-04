@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Center, Grid, GridItem} from '@chakra-ui/react';
+import {Center, Grid, GridItem, Heading} from '@chakra-ui/react';
 import SearchForm from '../components/SearchForm'
 import RecipeResults from '../components/RecipeResults'
 import { useDispatch } from 'react-redux';
@@ -23,19 +23,20 @@ export default function Breakfast() {
   }, [dispatch])
 
   return (
-    <div>
+    <div style={{backgroundColor:'rgb(38, 45, 51)'}}>
       {width > breakPoint? (
-            <div>
+            <div className='background'>
       <Grid
     h='200px'
     templateRows='repeat(1, 1fr)'
     templateColumns='repeat(3, 1fr)'
     gap={4}
   >
-    <GridItem rowSpan={1} colSpan={1} bg='tomato'><SearchForm hideMealType/></GridItem>
-    <GridItem colSpan={2} bg='papayawhip'><br /><Center p={10}>
-    <img src='https://see.fontimg.com/api/renderfont4/ALEmp/eyJyIjoiZnMiLCJoIjo1NiwidyI6MTI1MCwiZnMiOjQ1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/YnJlYWtmYXN0/mandhor.png' alt='breakfast'/>
-  </Center><br /><RecipeResults /></GridItem>
+    <GridItem rowSpan={1} colSpan={1} bg='rgb(38, 45, 51)'><SearchForm hideMealType/></GridItem>
+    <GridItem colSpan={2} bg='rgb(38, 45, 51)'>
+      <br />
+    <Heading as='h2' size='xl'  className='logo' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}>Breakfast</Heading>
+  <br /><RecipeResults /></GridItem>
   </Grid>
   </div>
       ) : (
@@ -44,12 +45,15 @@ export default function Breakfast() {
         templateRows='repeat(2, 1fr)'
         templateColumns='repeat(3, 1fr)'
         gap={4}
-      >
-        <GridItem rowSpan={1} colSpan={3} bg='tomato'><SearchForm hideMealType/></GridItem>
-        <GridItem colSpan={3} bg='papayawhip'><br /><Center p={10}>
-        <img src='https://see.fontimg.com/api/renderfont4/ALEmp/eyJyIjoiZnMiLCJoIjo1NiwidyI6MTI1MCwiZnMiOjQ1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/YnJlYWtmYXN0/mandhor.png' alt='breakfast'/>
-      </Center><br /><RecipeResults /></GridItem>
-      </Grid>
+        >
+          <GridItem rowSpan={1} colSpan={3} bg='rgb(38, 45, 51)'><SearchForm hideMealType/></GridItem>
+          <GridItem colSpan={3} bg='rgb(38, 45, 51)'>
+            <br />
+            <Heading as='h2' size='xl'  className='logo' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}>Breakfast</Heading>
+            <br />
+          <RecipeResults />
+          </GridItem>
+        </Grid>
       )}
     </div>
   );

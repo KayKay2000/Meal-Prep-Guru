@@ -11,8 +11,8 @@ export default function NumberOfResults() {
   }
 
   return (
-    <div>
-      <b>How many results?</b>
+    <div className='option'>
+      How many results?
       <Select value={resultsNumber} onChange={(e) => setResultsNumber(e.target.value)} >
         <option>1</option>
         <option>5</option>

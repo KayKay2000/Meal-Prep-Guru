@@ -18,14 +18,14 @@ export default function AllergiesSearch() {
   return (
     <div>
     <Box>
-            <Heading as='h6' size='md' p={5} textDecoration='underline'>
+            <Heading as='h6' size='md' p={5} fontWeight='light' color='white'>
     Allergies
   </Heading>
-      <SimpleGrid spacingX={10} columns={{ sm: 2, md: 2, lg: 3 }}>
+      <SimpleGrid spacingX={10} columns={{ sm: 2, md: 2, lg: 2 }}>
         {intolerances.map((intolerance) => {
           return (
-            <Checkbox key={intolerance.id} colorScheme='red' id={intolerance.type} name={intolerance.type} onChange={(e) => handleChangeAllergy(intolerance.type, e.target.checked)} value={intolerance.type}>
-              {intolerance.type}
+            <Checkbox key={intolerance.id} colorScheme='black' id={intolerance.type} name={intolerance.type} onChange={(e) => handleChangeAllergy(intolerance.type, e.target.checked)} value={intolerance.type} color='white'>
+              {intolerance.type.toUpperCase()}
             </Checkbox>
         )})}
       </SimpleGrid>

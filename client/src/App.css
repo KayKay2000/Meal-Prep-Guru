@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  /* background-color: rgb(38, 45, 51); */
+  /* height:20em; */
+  /* width: 100vw; */
 }
 
 .parent {
@@ -132,4 +135,12 @@ nav{
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.background {
+  background-color: rgb(38, 45, 51);
+  /* height:max-content;
+  width: 100%; */
+}
+.option {
+  color:white;
 }

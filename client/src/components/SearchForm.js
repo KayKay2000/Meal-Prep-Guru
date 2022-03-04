@@ -14,10 +14,10 @@ const dispatch = useDispatch();
 dispatch(search)
   }
 
-  return <div>
+  return <div className='background'>
 <Center>
-  <Box boxShadow='dark-lg' p='6' rounded='md' bg='white' m={15}>
-  <Heading as='h4' size='md'>
+  <Box border='solid' boxShadow='dark-lg' p='6' rounded='md' bg='black' m={15} position='sticky' top='10'>
+  <Heading as='h4' size='md' fontWeight='medium' color='white'>
     Search through 5000+ recipes tailored to your needs...
   </Heading>
     <Flex direction="column" justify='center' m={5} pe={10} align='center'>
@@ -33,7 +33,14 @@ dispatch(search)
     <AllergiesSearch />
     <Spacer/>
     </Flex>
-    <Button colorScheme='green' variant='solid' onClick={fetchRecipe}>
+    <Button size='md'
+            height='28px'
+            width='200px'
+            border='1px'
+            colorScheme='black'
+            borderRadius={70}
+            color='blue'
+            onClick={fetchRecipe}>
     Get Recipes
   </Button>
     </Box>

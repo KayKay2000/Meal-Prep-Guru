@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
 import Home from './pages/Home';
-import { logout } from './redux/reducers/userReducer';
+import { checkUser, logout } from './redux/reducers/userReducer';
 import { Button, Center, IconButton, Menu, MenuButton, MenuItem, MenuList, Heading } from '@chakra-ui/react';
 import Breakfast from './pages/Breakfast';
 import Lunch from './pages/Lunch';
@@ -13,6 +13,8 @@ import Dinner from './pages/Dinner';
 import Dessert from './pages/Dessert';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
+import { useEffect } from 'react';
+
 
 function App() {
   const currentUser = useSelector(state => state.user.currentUser)
@@ -21,8 +23,11 @@ function App() {
   console.log(currentUser)
   const handleLogout = () => {
     dispatch(logout)
-    navigate('/')
+    navigate('/Sign-in')
   }
+  useEffect(()=> {
+    dispatch(checkUser)
+  }, [dispatch])
 
   return (
     <div className="App">
@@ -35,7 +40,7 @@ function App() {
                   <Link to="/favorites">Favorites</Link>
                   <Link to="/profile">Profile</Link>
           <div className='loginCredentials'>
-            <div>Hello, {currentUser.username}</div>
+            <div>Hello, {currentUser.firstName}</div>
               <Button onClick={handleLogout} colorScheme="blue" variant='link'>Logout</Button>
             </div>
           </nav>
