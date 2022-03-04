@@ -1,8 +1,5 @@
 .App {
   text-align: center;
-  /* background-color: rgb(38, 45, 51); */
-  /* height:20em; */
-  /* width: 100vw; */
 }
 
 .parent {
@@ -13,7 +10,6 @@
 .leftSide {
   background-color: black;
   width: 55vw;
-  /* height: 116.9vh */
 }
 
 .leftSide img {
