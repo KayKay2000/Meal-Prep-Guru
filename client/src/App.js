@@ -13,6 +13,8 @@ import Dinner from './pages/Dinner';
 import Dessert from './pages/Dessert';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
+import Favorites from './pages/Favorites';
+import { fetchFavorites } from './redux/reducers/favoritesReducer';
 import { useEffect } from 'react';
 
 
@@ -20,7 +22,11 @@ function App() {
   const currentUser = useSelector(state => state.user.currentUser)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  console.log(currentUser)
+
+  useEffect(() => {
+    dispatch(fetchFavorites)
+  }, [dispatch])
+
   const handleLogout = () => {
     dispatch(logout)
     navigate('/Sign-in')
@@ -54,6 +60,7 @@ function App() {
         <Route path="/lunch" element={<Lunch />} />
         <Route path="/dinner" element={<Dinner />} />
         <Route path="/dessert" element={<Dessert />} />
+        <Route path="/favorites" element={<Favorites />} />
         {/* <Route path="/favorites" element={<Favorites />} />
         <Route path="/profile" element={<Profile />} /> */}
       </Routes>
