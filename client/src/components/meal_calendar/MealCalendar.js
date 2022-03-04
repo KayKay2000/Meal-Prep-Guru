@@ -36,12 +36,12 @@ function MealCalendar() {
     return mealPlan.find(planDay => planDay.day === day);
   }
   
-    // when determining if meal item is breakfast/lunch/dinner, the index needs to be divisible by 7
-    // in an indexed grid with 7 columns, you can subtract the index of a weekday array to make the index divisible
-    const offsetIndex = (index, day) => {
-      const offset = weekdayArray.indexOf(day);
-      return index - offset;
-    }
+  // when determining if meal item is breakfast/lunch/dinner, the index needs to be divisible by 7
+  // in an indexed grid with 7 columns, you can subtract the index of a weekday array to make the index divisible
+  const offsetIndex = (index, day) => {
+    const offset = weekdayArray.indexOf(day);
+    return index - offset;
+  }
 
   const getSlotData = (dayIndex, planDay) => {
     switch (offsetIndex(dayIndex, planDay.day) / 7) {
@@ -64,7 +64,7 @@ function MealCalendar() {
     <PageContainer>
       <DayAndGridContainer>
         <DaysContainer>
-          {new Array(7).fill().map((_, index) => <Day key={index} >{weekdayArray[index]}</Day>)}
+          {new Array(7).fill().map((_, index) => <Day key={index} >{weekdayArray[index].toLocaleUpperCase()}</Day>)}
         </DaysContainer>
         {
           Object.keys(plannerData).length === 0 ?
@@ -79,7 +79,7 @@ function MealCalendar() {
                     item.imageLink = plannerData.imageObjectMap[`${item.value.id}`];
                   })
                 }
-                return <MealSlot slotData={slotData} key={index} />
+                return <MealSlot slotData={slotData} index={index} key={index} />
             })}
           </Grid> )
         }  
@@ -97,11 +97,16 @@ const PageContainer = styled.div`
   margin-top: 6vw;
 `
 
+const MealTimeContainer = styled.div`
+  
+`
+
 const DayAndGridContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: min-content;
   height: min-content;
+  margin-top: 15vw;
 `
 
 const Grid = styled.div`
@@ -111,7 +116,7 @@ const Grid = styled.div`
   margin-top: 1vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  box-shadow: 0px 0px .4vh .1vh #00000030;
+  box-shadow: 0px 0px 1vh .1vh #00000010;
 `
 
 const DaysContainer = styled.div`
