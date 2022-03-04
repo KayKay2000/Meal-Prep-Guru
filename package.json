@@ -24,6 +24,7 @@
     "multer-s3": "^2.10.0",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
+    "react-redux": "^7.2.6",
     "sequelize": "^6.16.2",
     "sequelize-cli": "^6.4.1"
   }

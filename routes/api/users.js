@@ -10,6 +10,7 @@ const singleUpload = upload.single("image");
 router.post('/register', function(req, res, next) {
   if (!req.body.username || !req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password || !req.body.phoneNumber) {
     res.status(400).json({
+      object: req.body,
       error: 'please include all required fields'
     })
     return

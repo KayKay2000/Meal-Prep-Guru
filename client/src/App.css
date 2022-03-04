@@ -2,37 +2,124 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.parent {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+.leftSide {
+  background-color: black;
+  width: 55vw;
+  /* height: 116.9vh */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.leftSide img {
+  height: 100%;
+  width: 100%;
+  
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.rightSide {
+  background-color: black;
+  color: whitesmoke;
+  width: 45vw;
+  height:max-content;
+}
+.logo {
+  font-family:fantasy; 
+  font-weight:bold;
+}
+.signUpForm {
+  width: 70%;
+  margin-left: 2%;
+}
+.join {
+  text-align: left;
+}
+.features{
+  display: flex;
+  justify-content: space-around;
+}
+.discover {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.favorites {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.mealPlan {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.signInButton {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
+  margin-left: 2%;
+}
+.join {
+  margin-left: 2%;
+}
+.member {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 2%;
+}
+.signInBackground {
+  background-color: rgb(38, 45, 51);
+  height: 100vh;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+}
+.signIn {
   color: white;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 5%;
+  padding-bottom: 10%;
+}
+.modal {
+  background-color: rgb(1, 0, 0);
+  border-radius: 5%;
+  width: 40vw;
+  box-shadow:  4px 10px 30px white;
 }
 
-.App-link {
-  color: #61dafb;
+@media screen and (max-device-width: 820px) and (orientation: portrait){
+  .leftSide {
+    height:100vh;
+  }
+  .rightSide {
+    height: auto;
+  }
+}
+@media screen and (max-device-width: 1180px) and (orientation: landscape){
+  .leftSide {
+    height:106vh;
+  }
+  .rightSide {
+    height:fit-content;
+  }
+}
+@media screen and (max-device-width: 906px) and (orientation: landscape){
+  .leftSide {
+    height: 117vh;
+  }
+} 
+@media screen and (max-device-width: 390px) and (orientation: portrait){
+  .leftSide {
+    display: none;
+  }
+  .rightSide {
+    width: auto;
+    height:max-content;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

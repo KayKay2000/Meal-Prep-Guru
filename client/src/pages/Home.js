@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Box, Center, Flex, Image, Text } from '@chakra-ui/react';
 import { menuItem } from '../data/mainMenuCategory';
+import ImageSlider from '../components/ImageSlider';
 const apiKey = "933bd795ebbc44218ff61f94fb6e3575";
 
 
 export default function Home() {
   const [category, setCategory] = useState([])
-  const [name, setName] = useState([])
 
   useEffect(() => {
     const fetchImage = async (category) => {
@@ -40,20 +40,25 @@ export default function Home() {
             </Box>
           )})}
         </Flex>
-        <Flex justifyContent="space-around" mt={-6}>
-          <Box w="230px" height="50px" rounded="20px" border="1px solid black" pt={3}>
-            Breakfast
+        <Flex justifyContent="space-evenly" mt={-6}>
+          <Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3} me={5}>
+            <strong>Breakfast</strong>
           </Box>
-          <Box w="230px" height="50px" rounded="20px" border="1px solid black" pt={3}>
-            Lunch
+          <Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
+            <strong>Lunch</strong>
           </Box>
-          <Box w="230px" height="50px" rounded="20px" border="1px solid black" pt={3}>
-            Dinner
+          <Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
+            <strong>Dinner</strong>
           </Box>
-          <Box w="230px" height="50px" rounded="20px" border="1px solid black" pt={3}>
-            Dessert
+          <Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
+            <strong>Dessert</strong>
           </Box>
         </Flex>
+        <Center>
+          <Box>
+            <ImageSlider />
+          </Box>
+          </Center>
     </div>
   )
 }
