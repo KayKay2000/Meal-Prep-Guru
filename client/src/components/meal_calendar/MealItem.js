@@ -1,16 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
+import Options from './Options';
 
 function MealItem(props) {
   return (
     <ItemContainer image={props.item.imageLink} >
-        <RecipeImage src={props.item.imageLink.image} />
         <RecipeNameContainer>
             {props.item.value.title}
         </RecipeNameContainer>
+        <RecipeImage src={props.item.imageLink.image} />
+        <Options recipeId={props.item.id} />
     </ItemContainer>
   )
 }
+
+const RecipeNameContainer = styled.div`
+    width: 100%;
+    height: 25%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    font-weight: 500;
+    font-size: .6vw;
+`
 
 const ItemContainer = styled.div`
     width: 12vw;
@@ -30,15 +45,5 @@ const RecipeImage = styled.img`
     position: absolute;
 `
 
-const RecipeNameContainer = styled.div`
-    width: 100%;
-    height: 20%;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    color: white;
-`
 
 export default MealItem;

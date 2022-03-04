@@ -97,10 +97,6 @@ const PageContainer = styled.div`
   margin-top: 6vw;
 `
 
-const MealTimeContainer = styled.div`
-  
-`
-
 const DayAndGridContainer = styled.div`
   display: flex;
   flex-direction: column;
