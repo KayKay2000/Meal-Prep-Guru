@@ -30,7 +30,7 @@ export default function Breakfast() {
     h='200px'
     templateRows='repeat(1, 1fr)'
     templateColumns='repeat(3, 1fr)'
-    gap={4}
+    
   >
     <GridItem rowSpan={1} colSpan={1} bg='rgb(38, 45, 51)'><SearchForm hideMealType/></GridItem>
     <GridItem colSpan={2} bg='rgb(38, 45, 51)'>

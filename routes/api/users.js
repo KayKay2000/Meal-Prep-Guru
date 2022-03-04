@@ -18,6 +18,7 @@ router.post('/register', function (req, res, next) {
 
   models.User.findAll({
     where: {
+      username: req.body.username,
       email: req.body.email
     }
   }).then(users => {
