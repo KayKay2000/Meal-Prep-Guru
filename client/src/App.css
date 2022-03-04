@@ -138,9 +138,11 @@ nav{
 }
 .background {
   background-color: rgb(38, 45, 51);
-  /* height:max-content;
-  width: 100%; */
+  height: 100vh;
 }
 .option {
   color:white;
+}
+.instructions {
+  color: white;
 }

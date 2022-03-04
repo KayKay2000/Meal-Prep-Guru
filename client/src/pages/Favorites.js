@@ -1,4 +1,4 @@
-import { Box, Center, SimpleGrid } from '@chakra-ui/react'
+import { Box, Center, SimpleGrid, Heading } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -21,11 +21,9 @@ function Favorites() {
   }, [favorites])
 
   return (
-    <div>
-      <Box>
-        <Center pt={10}>
-          <img src="https://see.fontimg.com/api/renderfont4/83GA/eyJyIjoiZnMiLCJoIjo4OCwidyI6MTI1MCwiZnMiOjcwLCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/WW91ciBGYXZvcml0ZXMgLiAuIC4/rolleteqaku-regular.png" alt='favorites' />
-        </Center>
+    <div className='background'>
+      <Box color="white">
+      <Heading as='h2' size='xl' className='logo' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}>Your Favorites</Heading>
 
         {favorites.length === 0 ? <Box p={10}>You have no recipes in your favorites!</Box> : <SimpleGrid columns={{ sm: 2, md: 3, lg: 4 }}>
           {results.map(recipe => {
