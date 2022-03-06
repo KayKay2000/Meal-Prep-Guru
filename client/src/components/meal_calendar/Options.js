@@ -1,17 +1,23 @@
 import axios from 'axios';
 import React from 'react'
+import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { checkPlanner } from '../../redux/reducers/plannerReducer';
+// import { removeItem } from '../../redux/reducers/plannerReducer';
 
 function Options(props) {
-    // const removeItem = () => {
-    //     axios.delete
-    // }
-  
+    const dispatch = useDispatch();
+    const apiKey = '9cf4d082fd9f4fdb90897ddfc4582935';
+    const handleRemoveItem = () => {
+        axios.delete(`https://api.spoonacular.com/mealplanner/safehaven1017/items/${props.recipeId}?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`);
+        props.render();
+    }
     return (
     <OptionsContainer>
         <OptionButton>DUPLICATE</OptionButton>
         <OptionButton>VIEW RECIPE</OptionButton>
-        <OptionButton> REMOVE</OptionButton>
+        <OptionButton onClick={handleRemoveItem} > REMOVE</OptionButton>
     </OptionsContainer>
   )
 }

@@ -4,19 +4,35 @@ import { useEffect, useState } from 'react';
 import MealSlot from './MealSlot';
 import axios from 'axios';
 import { Spinner } from '@chakra-ui/react'
+import { useDispatch, useSelector } from 'react-redux';
+import { setPlanner } from '../../redux/reducers/plannerReducer';
 
 function MealCalendar() {
   const weekdayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const apiKey = '9cf4d082fd9f4fdb90897ddfc4582935';
+  const planner = useSelector(state => state.planner)
+  const dispatch = useDispatch();
   const [ plannerData, setPlannerData ] = useState({});
-  const apiKey = '68389b1f8db2442ab7f2595d12160698'
+  const [ renderPlan, setRenderPlan ] = useState(true);
+  const handleRerender = () => {
+    setRenderPlan(!renderPlan);
+    setPlannerData({});
+  }
 
-  // fetching the user's current meal planner, then fetching the individual recipes for said meal planner to get image data
   useEffect(() => {
-    axios.get(`https://api.spoonacular.com/mealplanner/safehaven1017/week/2022-02-28?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`)
-    .then(res => {
-      const mealPlan = res.data.days;
+    const timer = setTimeout(() => {
+      axios.get(`https://api.spoonacular.com/mealplanner/safehaven1017/week/2022-02-28?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`)
+      .then(res => {
+      dispatch(setPlanner(res.data.days));
+      })
+    }, 1000)
+    return () => clearTimeout(timer);
+  }, [dispatch, renderPlan]);
+  useEffect(() => {
+    console.log('getting pics...');
+    if (planner.length) {
       const recipeIds = []; 
-      res.data.days.forEach(day => {
+      planner.forEach(day => {
         day.items.forEach(item => {
           recipeIds.push(item.value.id);
         })
@@ -27,12 +43,12 @@ function MealCalendar() {
           imageObjectMap[`${recipe.id}`] = recipe;
         })
         setPlannerData({
-          mealPlan,
+          mealPlan: planner,
           imageObjectMap
         });
       })
-    })
-  }, [])
+    }
+  }, [planner]);
   
   const getMealPlanDay = (day, mealPlan) => {
     return mealPlan.find(planDay => planDay.day === day);
@@ -48,11 +64,11 @@ function MealCalendar() {
   const getSlotData = (dayIndex, planDay) => {
     switch (offsetIndex(dayIndex, planDay.day) / 7) {
       case 0:
-        return { items: planDay.items.filter(item => item.slot === 1), type: "meals" };
+        return { items: planDay.items.filter(item => item.slot === 1), date: planDay.date, type: "meals" };
       case 1:
-        return { items: planDay.items.filter(item => item.slot === 2), type: "meals" };
+        return { items: planDay.items.filter(item => item.slot === 2), date: planDay.date, type: "meals" };
       case 2:
-        return { items: planDay.items.filter(item => item.slot === 3), type: "meals" };
+        return { items: planDay.items.filter(item => item.slot === 3), date: planDay.date, type: "meals" };
       case 3:
         const filteredNutrientsArray = planDay.nutritionSummary.nutrients.filter(nutrient => 
           nutrient.name === "Calories" || nutrient.name === "Fat" || nutrient.name === "Calories" || nutrient.name === "Protein" || nutrient.name === "Carbohydrates");
@@ -82,7 +98,7 @@ function MealCalendar() {
                         item.imageLink = plannerData.imageObjectMap[`${item.value.id}`];
                       })
                     }
-                    return <MealSlot slotData={slotData} index={index} key={index} />
+                    return <MealSlot slotData={slotData} index={index} render={() => handleRerender()} key={index} />
                 })}
               </Grid>  
           </DayAndGridContainer>

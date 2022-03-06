@@ -9,7 +9,7 @@ function MealItem(props) {
             {props.item.value.title}
         </RecipeNameContainer>
         <RecipeImage src={props.item.imageLink.image} />
-        <Options recipeId={props.item.id} />
+        <Options recipeId={props.item.id} date={props.date} render={() => props.render()} />
     </ItemContainer>
   )
 }

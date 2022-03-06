@@ -20,7 +20,7 @@ function MealSlot(props) {
         {
             props.slotData.type === 'meals' ? 
                 props.slotData.items.length > 0 ?
-                    props.slotData.items.map((item, index) => <MealItem item={item} key={index}/>)
+                    props.slotData.items.map((item, index) => <MealItem item={item} date={props.slotData.date} render={() => props.render()} key={index}/>)
                     :
                     ''
             :
