@@ -13,7 +13,7 @@ function Favorites() {
       return
     }
 
-    axios.get(`https://api.spoonacular.com/recipes/informationBulk/?apiKey=a305942736b44f9aa6879f92ab78f647&ids=${favorites.map((favorite) => favorite.recipeID).join(',')}`)
+    axios.get(`https://api.spoonacular.com/recipes/informationBulk/?apiKey=de796f2239c841b099773f5034406613&ids=${favorites.map((favorite) => favorite.recipeID).join(',')}`)
       .then((res) => {
         setResults(res.data)
       })

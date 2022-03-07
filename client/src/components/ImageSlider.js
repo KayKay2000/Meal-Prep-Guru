@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
 import { cuisines } from '../data/cuisines';
 import axios from 'axios'
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 const apiKey = "933bd795ebbc44218ff61f94fb6e3575";
 
 
@@ -30,8 +30,6 @@ export default function ImageSlider() {
     return null
   }
 
-  console.log(cuisine)
-
   const handleDragStart = (e) => e.preventDefault();
 
   const items = [
@@ -44,6 +42,6 @@ export default function ImageSlider() {
   ];
 
   return (
-    <AliceCarousel disableDotsControls mouseTracking items={items} />
+<div><AliceCarousel mouseTracking items={items} /></div>
   )
 }

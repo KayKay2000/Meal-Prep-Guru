@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Box, Center, Flex, Image, Text } from '@chakra-ui/react';
 import { menuItem } from '../data/mainMenuCategory';
 import ImageSlider from '../components/ImageSlider';
-const apiKey = "933bd795ebbc44218ff61f94fb6e3575";
+const apiKey = "de796f2239c841b099773f5034406613";
 
 
 export default function Home() {
@@ -30,8 +30,9 @@ export default function Home() {
     <div>
         <Flex justifyContent="space-evenly">
           {category.map((categoryItem) => {
+            console.log(menuItem)
             return (
-            <Box w="300px" rounded="20px"
+            <Box w="270px" rounded="20px"
             overflow="hidden" bg={'white'} mt={10}>
             <Box boxShadow='dark-lg' p='6' rounded='md' bg='white'>
               <Image rounded='md' src={categoryItem.image} alt={categoryItem.title} boxSize="250px">
@@ -41,18 +42,18 @@ export default function Home() {
           )})}
         </Flex>
         <Flex justifyContent="space-evenly" mt={-6}>
-          <Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3} me={5}>
+        <a href="/breakfast"><Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
             <strong>Breakfast</strong>
-          </Box>
-          <Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
+          </Box></a>
+          <a href="/lunch"><Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
             <strong>Lunch</strong>
-          </Box>
-          <Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
+          </Box></a>
+          <a href="dinner"><Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
             <strong>Dinner</strong>
-          </Box>
-          <Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
+          </Box></a>
+          <a href="dessert"> <Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
             <strong>Dessert</strong>
-          </Box>
+          </Box></a>
         </Flex>
         <Center>
           <Box>
