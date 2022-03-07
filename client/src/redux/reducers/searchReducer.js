@@ -25,7 +25,7 @@ export function search(dispatch, getState) {
   if (diet.length) tags.push(diet);
   if (mealType) tags.push(mealType);
 
-  let url = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}`
+  let url = `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}`
   if (tags.length) {
     url += '&tags=' + encodeURIComponent(tags.join(','))
   }
