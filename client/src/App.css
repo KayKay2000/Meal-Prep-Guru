@@ -10,6 +10,7 @@
 .leftSide {
   background-color: black;
   width: 55vw;
+
 }
 
 .leftSide img {
@@ -87,14 +88,27 @@
   box-shadow:  4px 10px 30px white;
 }
 
-@media screen and (max-device-width: 820px) and (orientation: portrait){
+@media screen and (max-device-width: 1920px) and (orientation: landscape){
   .leftSide {
-    height:100vh;
-  }
-  .rightSide {
     height: auto;
   }
+  .rightSide {
+    height:auto;
+  }
 }
+@media screen and (max-device-width: 1366px) and (orientation: landscape){
+  .leftSide {
+    height:113%;
+  }
+  .rightSide {
+    height:fit-content;
+  }
+}
+@media screen and (max-device-width: 1280px) and (orientation: landscape){
+  .leftSide {
+    height: 109vh;
+  }
+} 
 @media screen and (max-device-width: 1180px) and (orientation: landscape){
   .leftSide {
     height:106vh;
@@ -103,18 +117,46 @@
     height:fit-content;
   }
 }
+@media screen and (max-device-width: 1024px) and (orientation: landscape){
+  .leftSide {
+    height: 150vh;
+  }
+} 
+
+@media screen and (max-device-width: 912px) and (orientation: portrait){
+  .leftSide {
+    height: 100%;
+  }
+  .rightSide {
+    height: auto;
+  }
+} 
 @media screen and (max-device-width: 906px) and (orientation: landscape){
   .leftSide {
     height: 117vh;
   }
 } 
-@media screen and (max-device-width: 390px) and (orientation: portrait){
+@media screen and (max-device-width: 820px) and (orientation: portrait){
+  .leftSide {
+    height:100vh;
+  }
+  .rightSide {
+    height: auto;
+  }
+  .modal {
+    width: 60vw;
+  }
+}
+@media screen and (min-device-width: 280px) and (max-device-width: 540px) and (orientation: portrait){
   .leftSide {
     display: none;
   }
   .rightSide {
     width: auto;
     height:max-content;
+  }
+  .modal {
+    width:80vw;
   }
 }
 
