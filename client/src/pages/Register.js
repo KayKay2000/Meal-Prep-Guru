@@ -11,7 +11,9 @@ import {
     FormLabel,
     Button,
     Input,
-    Heading
+    Heading,
+    Alert,
+    AlertIcon
 } from '@chakra-ui/react'
 import axios from 'axios';
 
@@ -64,6 +66,12 @@ return (
             <br />
             <div className='signUpForm' >
                 <form onSubmit={handleSubmit}>
+                { error && (
+                        <Alert maxWidth="400px" mx="auto" my="5" status='error' variant='subtle' color='black'>
+                        <AlertIcon />
+                        Error!&nbsp;{error}
+                        </Alert>
+                    )}
                     <FormControl isRequired>
                         <FormLabel htmlFor='username'>Username</FormLabel>
                         <Input id='username' placeholder='Username' borderRadius={70} mb='1' value={username}
