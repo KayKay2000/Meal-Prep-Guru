@@ -129,7 +129,7 @@ function MealCalendar() {
         return null;      
     }
   }
-  
+
   return (
     <PageContainer>
       {
@@ -179,6 +179,7 @@ const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 6vw;
+  transition: .5s;
 `
 
 const DayAndGridContainer = styled.div`
@@ -187,6 +188,7 @@ const DayAndGridContainer = styled.div`
   width: min-content;
   height: min-content;
   margin-top: ${props => props.margin ? '20vw' : '0vw'};
+  transition: .5s;
 `
 
 const WeekDiv = styled.div`
@@ -194,6 +196,7 @@ const WeekDiv = styled.div`
   font-weight: 900;
   font-size: 3vw;
   display: flex;
+  transition: .5s;
 `
 
 const Grid = styled.div`
@@ -204,6 +207,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   box-shadow: 0px 0px 1vh .1vh #00000010;
+  transition: .5s;
 `
 
 const DaysContainer = styled.div`
