@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { keyframes } from 'styled-components'
 import { useEffect, useState } from 'react';
 import MealSlot from './MealSlot';
 import axios from 'axios';
 import { Spinner } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setPlanner } from '../../redux/reducers/plannerReducer';
 import { PrevButton } from './buttons/PrevButton';
 import { NextButton } from './buttons/NextButton';
@@ -55,37 +57,44 @@ function MealCalendar() {
     return `${MONTHS[parseInt(splitDate[1]) - 1]} ${removeZero(splitDate[2])}`
   }
 
+  const navigate = useNavigate();
   const weekdayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const apiKey = 'c45e6cbe895742f6a43c5da049a3f77c';
-  const planner = useSelector(state => state.planner)
+  const planner = useSelector(state => state.planner);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const [ plannerData, setPlannerData ] = useState(null);
   const [ renderPlan, setRenderPlan ] = useState(true);
   const [ week, setWeek ] = useState(getThisWeek);
-  const [loadingState, setLoadingState] = useState('NOT LOADED');
-  
+  const [ loadingState, setLoadingState ] = useState('NOT LOADED');
+  const [ errorState, setErrorState ] = useState({});
   
   const handleRerender = () => {
     setRenderPlan(!renderPlan);
-    // setPlannerData({});
   }
 
   useEffect(() => {
+    if (!user.currentUser) return;
     setLoadingState('LOADING');
-    axios.get(`https://api.spoonacular.com/mealplanner/safehaven1017/week/${week}?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`)
+    axios.get(`https://api.spoonacular.com/mealplanner/${user.currentUser.spoonacularUsername}/week/${week}?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.API_KEY}`)
     .then(res => {
     dispatch(setPlanner(res.data.days));
+    }).catch(error => {
+      if (error.response) {
+        setLoadingState('ERROR');
+        setErrorState(error.response.data)
+      }
     })
-  }, [dispatch, renderPlan, week]);
+  }, [dispatch, renderPlan, week, user.currentUser]);
   useEffect(() => {
-    if (planner.length) {
+    if (planner.length && loadingState !== 'ERROR') {
+      setLoadingState('LOADING');
       const recipeIds = []; 
       planner.forEach(day => {
         day.items.forEach(item => {
           recipeIds.push(item.value.id);
         })
       })
-      axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIds.join(',')}&apiKey=${apiKey}`).then(res => {
+      axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIds.join(',')}&apiKey=${process.env.API_KEY}`).then(res => {
         const imageObjectMap = {};
         res.data.forEach(recipe => {
           imageObjectMap[`${recipe.id}`] = recipe;
@@ -129,57 +138,78 @@ function MealCalendar() {
         return null;      
     }
   }
+  
+  !user.currentUser && navigate('/Sign-in');
 
   return (
-    <PageContainer>
-      {
-        (loadingState === 'NOT LOADED' ||
-        loadingState === 'LOADING') &&
-        <Spinner style={{marginTop: '-50vw'}} size='xl' /> 
-      }    
-      {
-        (loadingState === 'LOADED' ||
-        loadingState === 'NO DATA') &&
-          <DayAndGridContainer margin={Object.keys(planner).length ? true : false} >
-            <WeekDiv>
-              <PrevButton onClick={() => getAdjacentWeek('previous')} >◀</PrevButton>
-              WEEK OF {printWeek(week)}
-              <NextButton onClick={() => getAdjacentWeek('next')} >▶</NextButton>
-            </WeekDiv>
-            <DaysContainer>
-              {new Array(7).fill().map((_, index) => <Day key={index} >{weekdayArray[index].toLocaleUpperCase()}</Day>)}
-            </DaysContainer> 
-              <Grid>
-                {new Array(28).fill().map((_, index) => {
-                    if (loadingState === 'LOADED' && plannerData?.mealPlan) {
-                      const weekday = weekdayArray[index % 7];
-                      const mealPlanDay = getMealPlanDay(weekday, plannerData.mealPlan);
-                      const slotData = mealPlanDay ? getSlotData(index, mealPlanDay) : '';
-                      if (slotData.type === 'meals') {
-                        slotData.items.forEach(item => {
-                          item.additionalData = plannerData.imageObjectMap[`${item.value.id}`];
-                        })
+    user.currentUser &&
+      <PageContainer>
+        {
+          (loadingState === 'NOT LOADED' ||
+          loadingState === 'LOADING') &&
+          <Spinner size='xl' /> 
+        }    
+        {
+          (loadingState === 'LOADED' ||
+          loadingState === 'NO DATA') &&
+            <DayAndGridContainer margin={Object.keys(planner).length ? true : false} >
+              <WeekDiv>
+                <PrevButton onClick={() => getAdjacentWeek('previous')} >◀</PrevButton>
+                WEEK OF {printWeek(week)}
+                <NextButton onClick={() => getAdjacentWeek('next')} >▶</NextButton>
+              </WeekDiv>
+              <DaysContainer>
+                {new Array(7).fill().map((_, index) => <Day key={index} >{weekdayArray[index].toLocaleUpperCase()}</Day>)}
+              </DaysContainer> 
+                <Grid>
+                  {new Array(28).fill().map((_, index) => {
+                      if (loadingState === 'LOADED' && plannerData?.mealPlan) {
+                        const weekday = weekdayArray[index % 7];
+                        const mealPlanDay = getMealPlanDay(weekday, plannerData.mealPlan);
+                        const slotData = mealPlanDay ? getSlotData(index, mealPlanDay) : '';
+                        if (slotData.type === 'meals') {
+                          slotData.items.forEach(item => {
+                            item.additionalData = plannerData.imageObjectMap[`${item.value.id}`];
+                          })
+                        }
+                        return <MealSlot slotData={slotData} index={index} status={true} render={() => handleRerender()} key={index} />
+                      } else {
+                        return <MealSlot index={index} status={false} render={() => handleRerender()} key={index} />
                       }
-                      return <MealSlot slotData={slotData} index={index} status={true} render={() => handleRerender()} key={index} />
-                    } else {
-                      return <MealSlot index={index} status={false} render={() => handleRerender()} key={index} />
-                    }
-                })}
-              </Grid>  
-          </DayAndGridContainer>
-      }
-    </PageContainer>
+                  })}
+                </Grid>  
+            </DayAndGridContainer>
+        }
+        {
+          loadingState === 'ERROR' &&
+          <div>
+            <div>
+              Unable to load the calendar at this time. There may be an issue on the server, or the website is out of request points.
+            </div>
+            <div>
+              Error Code: {errorState.code}
+            </div>
+            <div>
+              {errorState.message}
+            </div>
+          </div>
+        }
+      </PageContainer>
   )
 }
+
+const appearAnimation = keyframes`
+ 0% { opacity: 0; }
+ 100% { opacity: 1; }
+`
 
 const PageContainer = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 6vw;
   transition: .5s;
+  margin-top: 2vw;
 `
 
 const DayAndGridContainer = styled.div`
@@ -187,7 +217,6 @@ const DayAndGridContainer = styled.div`
   flex-direction: column;
   width: min-content;
   height: min-content;
-  margin-top: ${props => props.margin ? '20vw' : '0vw'};
   transition: .5s;
 `
 
@@ -208,6 +237,8 @@ const Grid = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   box-shadow: 0px 0px 1vh .1vh #00000010;
   transition: .5s;
+  animation-name: ${appearAnimation};
+  animation-duration: .5s;
 `
 
 const DaysContainer = styled.div`
