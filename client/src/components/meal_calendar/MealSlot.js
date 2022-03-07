@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import MealItem from './MealItem';
 
 function MealSlot(props) {
+    const maxPosition = props.slotData.type === 'meals' && props.slotData.items.map(item => item.position).reduce((a, b) => Math.max(a, b), -Infinity);
     return (
     <SlotContainer type={props.slotData.type} >
         {
@@ -20,7 +21,7 @@ function MealSlot(props) {
         {
             props.slotData.type === 'meals' ? 
                 props.slotData.items.length > 0 ?
-                    props.slotData.items.map((item, index) => <MealItem item={item} date={props.slotData.date} render={() => props.render()} key={index}/>)
+                    props.slotData.items.map((item, index) => <MealItem item={item} date={props.slotData.date} duplicatePosition={maxPosition + 1} render={() => props.render()} key={index}/>)
                     :
                     ''
             :

@@ -4,12 +4,12 @@ import Options from './Options';
 
 function MealItem(props) {
   return (
-    <ItemContainer image={props.item.imageLink} >
+    <ItemContainer>
         <RecipeNameContainer>
             {props.item.value.title}
         </RecipeNameContainer>
-        <RecipeImage src={props.item.imageLink.image} />
-        <Options recipeId={props.item.id} date={props.date} render={() => props.render()} />
+        <RecipeImage src={props.item.additionalData.image} />
+        <Options item={props.item} date={props.date} duplicatePosition={props.duplicatePosition} render={() => props.render()} />
     </ItemContainer>
   )
 }

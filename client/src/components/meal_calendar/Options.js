@@ -1,22 +1,41 @@
 import axios from 'axios';
 import React from 'react'
-import { useDispatch } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { checkPlanner } from '../../redux/reducers/plannerReducer';
 // import { removeItem } from '../../redux/reducers/plannerReducer';
 
 function Options(props) {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const apiKey = '9cf4d082fd9f4fdb90897ddfc4582935';
-    const handleRemoveItem = () => {
-        axios.delete(`https://api.spoonacular.com/mealplanner/safehaven1017/items/${props.recipeId}?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`);
-        props.render();
+
+    const handleDuplicateItem = () => {
+        axios.post(`https://api.spoonacular.com/mealplanner/safehaven1017/items?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`, {
+            date: props.date,
+            slot: props.item.slot,
+            position: props.duplicatePosition,
+            type: props.item.type,
+            value: props.item.value
+        }).then(() => {
+            props.render();
+        });
     }
+
+    const handleRemoveItem = () => {
+        axios.delete(`https://api.spoonacular.com/mealplanner/safehaven1017/items/${props.item.id}?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`)
+        .then(() => {
+            props.render();
+        })
+    }
+
+    const handleViewRecipe = () => {
+        window.open(props.item.additionalData.sourceUrl);
+    }
+
     return (
     <OptionsContainer>
-        <OptionButton>DUPLICATE</OptionButton>
-        <OptionButton>VIEW RECIPE</OptionButton>
+        <OptionButton onClick={handleDuplicateItem} >DUPLICATE</OptionButton>
+        <OptionButton onClick={handleViewRecipe}>VIEW RECIPE</OptionButton>
         <OptionButton onClick={handleRemoveItem} > REMOVE</OptionButton>
     </OptionsContainer>
   )

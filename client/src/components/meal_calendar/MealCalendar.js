@@ -20,16 +20,12 @@ function MealCalendar() {
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      axios.get(`https://api.spoonacular.com/mealplanner/safehaven1017/week/2022-02-28?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`)
-      .then(res => {
-      dispatch(setPlanner(res.data.days));
-      })
-    }, 1000)
-    return () => clearTimeout(timer);
+    axios.get(`https://api.spoonacular.com/mealplanner/safehaven1017/week/2022-02-28?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`)
+    .then(res => {
+    dispatch(setPlanner(res.data.days));
+    })
   }, [dispatch, renderPlan]);
   useEffect(() => {
-    console.log('getting pics...');
     if (planner.length) {
       const recipeIds = []; 
       planner.forEach(day => {
@@ -95,7 +91,7 @@ function MealCalendar() {
                     const slotData = mealPlanDay ? getSlotData(index, mealPlanDay) : '';
                     if (slotData.type === 'meals') {
                       slotData.items.forEach(item => {
-                        item.imageLink = plannerData.imageObjectMap[`${item.value.id}`];
+                        item.additionalData = plannerData.imageObjectMap[`${item.value.id}`];
                       })
                     }
                     return <MealSlot slotData={slotData} index={index} render={() => handleRerender()} key={index} />
