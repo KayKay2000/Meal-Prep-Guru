@@ -75,7 +75,7 @@ function MealCalendar() {
   useEffect(() => {
     if (!user.currentUser) return;
     setLoadingState('LOADING');
-    axios.get(`https://api.spoonacular.com/mealplanner/${user.currentUser.spoonacularUsername}/week/${week}?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.API_KEY}`)
+    axios.get(`https://api.spoonacular.com/mealplanner/${user.currentUser.spoonacularUsername}/week/${week}?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`)
     .then(res => {
     dispatch(setPlanner(res.data.days));
     }).catch(error => {
@@ -94,7 +94,7 @@ function MealCalendar() {
           recipeIds.push(item.value.id);
         })
       })
-      axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIds.join(',')}&apiKey=${process.env.API_KEY}`).then(res => {
+      axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${recipeIds.join(',')}&apiKey=${process.env.REACT_APP_API_KEY}`).then(res => {
         const imageObjectMap = {};
         res.data.forEach(recipe => {
           imageObjectMap[`${recipe.id}`] = recipe;

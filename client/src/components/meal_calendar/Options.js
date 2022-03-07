@@ -6,7 +6,7 @@ import styled from 'styled-components';
 function Options(props) {
     const user = useSelector(state => state.user)
     const handleDuplicateItem = () => {
-        axios.post(`https://api.spoonacular.com/mealplanner/safehaven1017/items?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.API_KEY}`, {
+        axios.post(`https://api.spoonacular.com/mealplanner/safehaven1017/items?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`, {
             date: props.date,
             slot: props.item.slot,
             position: props.duplicatePosition,
@@ -18,7 +18,7 @@ function Options(props) {
     }
 
     const handleRemoveItem = () => {
-        axios.delete(`https://api.spoonacular.com/mealplanner/safehaven1017/items/${props.item.id}?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.API_KEY}`)
+        axios.delete(`https://api.spoonacular.com/mealplanner/safehaven1017/items/${props.item.id}?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`)
         .then(() => {
             props.render();
         })
