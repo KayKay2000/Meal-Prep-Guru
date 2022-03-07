@@ -56,7 +56,7 @@ function MealCalendar() {
   }
 
   const weekdayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const apiKey = '68389b1f8db2442ab7f2595d12160698';
+  const apiKey = 'c45e6cbe895742f6a43c5da049a3f77c';
   const planner = useSelector(state => state.planner)
   const dispatch = useDispatch();
   const [ plannerData, setPlannerData ] = useState(null);
@@ -129,7 +129,7 @@ function MealCalendar() {
         return null;      
     }
   }
-  console.log(loadingState);
+  
   return (
     <PageContainer>
       {

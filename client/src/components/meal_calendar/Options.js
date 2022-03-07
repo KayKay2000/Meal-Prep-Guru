@@ -7,7 +7,7 @@ import { checkPlanner } from '../../redux/reducers/plannerReducer';
 
 function Options(props) {
     // const dispatch = useDispatch();
-    const apiKey = '68389b1f8db2442ab7f2595d12160698';
+    const apiKey = 'c45e6cbe895742f6a43c5da049a3f77c';
 
     const handleDuplicateItem = () => {
         axios.post(`https://api.spoonacular.com/mealplanner/safehaven1017/items?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`, {
