@@ -1,16 +1,12 @@
 import axios from 'axios';
 import React from 'react'
-// import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { checkPlanner } from '../../redux/reducers/plannerReducer';
-// import { removeItem } from '../../redux/reducers/plannerReducer';
 
 function Options(props) {
-    // const dispatch = useDispatch();
-    const apiKey = 'c45e6cbe895742f6a43c5da049a3f77c';
-
+    const user = useSelector(state => state.user)
     const handleDuplicateItem = () => {
-        axios.post(`https://api.spoonacular.com/mealplanner/safehaven1017/items?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`, {
+        axios.post(`https://api.spoonacular.com/mealplanner/safehaven1017/items?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`, {
             date: props.date,
             slot: props.item.slot,
             position: props.duplicatePosition,
@@ -22,7 +18,7 @@ function Options(props) {
     }
 
     const handleRemoveItem = () => {
-        axios.delete(`https://api.spoonacular.com/mealplanner/safehaven1017/items/${props.item.id}?hash=9b8c0e9c4a44720444ed3a25134e0e2d3358ff79&apiKey=${apiKey}`)
+        axios.delete(`https://api.spoonacular.com/mealplanner/safehaven1017/items/${props.item.id}?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`)
         .then(() => {
             props.render();
         })
