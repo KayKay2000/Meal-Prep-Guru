@@ -10,7 +10,6 @@
 .leftSide {
   background-color: black;
   width: 55vw;
-  /* height: 116.9vh */
 }
 
 .leftSide img {
@@ -23,10 +22,6 @@
   color: whitesmoke;
   width: 45vw;
   height:max-content;
-}
-.logo {
-  font-family:fantasy; 
-  font-weight:bold;
 }
 .signUpForm {
   width: 70%;
@@ -123,3 +118,27 @@
   }
 }
 
+.hide {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-content: center;
+  position: sticky;
+}
+nav{
+  width:85vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.background {
+  background-color: rgb(38, 45, 51);
+  height: 100vh;
+}
+.option {
+  color:white;
+}
+.instructions {
+  color: white;
+}

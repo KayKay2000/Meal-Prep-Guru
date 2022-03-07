@@ -4,7 +4,7 @@ import axios from 'axios'
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 const apiKey = "933bd795ebbc44218ff61f94fb6e3575";
-
+const apiKey2 = '2006cf2c3e4c4763861230ad68a14371';
 
 export default function ImageSlider() {
 

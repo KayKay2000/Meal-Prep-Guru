@@ -25,25 +25,25 @@ export function search(dispatch, getState) {
   if (diet.length) tags.push(diet);
   if (mealType) tags.push(mealType);
 
-let url = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}`
-if (tags.length) {
-  url += '&tags=' + encodeURIComponent(tags.join(','))
-}
+  let url = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}`
+  if (tags.length) {
+    url += '&tags=' + encodeURIComponent(tags.join(','))
+  }
 
-if (resultsNumber) {
-  url += `&number=${resultsNumber}`
-}
+  if (resultsNumber) {
+    url += `&number=${resultsNumber}`
+  }
 
-if (allergies.length) {
-  url += `&intolerances=${encodeURIComponent(allergies)}`
-}
+  if (allergies.length) {
+    url += `&intolerances=${encodeURIComponent(allergies)}`
+  }
 
-    axios.get(url)
-      .then((res) => {
-        dispatch(setResults(res.data.recipes))
-      })
-      .catch("There are no results, Please try again!")
-  };
+  axios.get(url)
+    .then((res) => {
+      dispatch(setResults(res.data.recipes))
+    })
+    .catch("There are no results, Please try again!")
+};
 
 export function setSearch(field, value) {
   return {

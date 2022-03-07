@@ -7,7 +7,7 @@ const singleUpload = upload.single("image");
 
 
 // /api/v1/users/register
-router.post('/register', function(req, res, next) {
+router.post('/register', function (req, res, next) {
   if (!req.body.username || !req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password || !req.body.phoneNumber) {
     res.status(400).json({
       object: req.body,
@@ -18,6 +18,7 @@ router.post('/register', function(req, res, next) {
 
   models.User.findAll({
     where: {
+      username: req.body.username,
       email: req.body.email
     }
   }).then(users => {
@@ -28,7 +29,7 @@ router.post('/register', function(req, res, next) {
     } else {
       bcrypt.hash(req.body.password, 10).then(hash => {
         models.User.create({
-          username:req.body.username,
+          username: req.body.username,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
@@ -86,7 +87,17 @@ router.get('/logout', (req, res) => {
     success: 'user logged out'
   })
 })
-
+router.get('/current', (req, res) => {
+  models.User.findByPk(req.session.user?.id)
+    .then((user) => {
+      if (!user) {
+        res.status(401).json({
+          error: 'please login'
+        })
+        return
+      } res.json(user)
+    })
+})
 
 //user profile
 router.get('/:userId/profile', (req, res) => {
@@ -99,28 +110,28 @@ router.get('/:userId/profile', (req, res) => {
     }
   })
 
-  .then(user => {
-    if (!user) {
-      res.status(404).json({
-        error: 'Could not find user with that id'
+    .then(user => {
+      if (!user) {
+        res.status(404).json({
+          error: 'Could not find user with that id'
+        })
+        return
+      }
+      res.json({
+        userId: user.id,
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        profilePicture: user.profilePicture,
+        phoneNumber: user.phoneNumber,
+        spoonacularUsername: req.body.spoonacularUsername,
+        spoonacularHash: req.body.spoonacularHash
       })
-      return
-    }
-    res.json({
-      userId: user.id,
-      username:user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      profilePicture: user.profilePicture,
-      phoneNumber: user.phoneNumber,
-      spoonacularUsername: req.body.spoonacularUsername,
-      spoonacularHash: req.body.spoonacularHash
     })
-  })
 })
 
 //update profile
-router.patch("/:userId/update-profile", function(req, res) {
+router.patch("/:userId/update-profile", function (req, res) {
   const uid = req.params.id;
 
   models.User.findAll({
@@ -152,11 +163,11 @@ router.patch("/:userId/update-profile", function(req, res) {
     }
   })
 });
- //add profile pic
-router.post("/:userId/add-profile-picture", function(req, res) {
+//add profile pic
+router.post("/:userId/add-profile-picture", function (req, res) {
   const uid = req.params.id;
 
-  singleUpload(req, res, function(err) {
+  singleUpload(req, res, function (err) {
     if (err) {
       return res.json({
         success: false,

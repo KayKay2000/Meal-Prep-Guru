@@ -12,9 +12,9 @@ export default function DietSearch() {
     dispatch(setSearch('diet', value))
   }
   return (
-    <div>
-      <b>Select a diet</b>
-      <Select value={diet} onChange={(e) => setDiet(e.target.value)}>
+    <div className='option'>
+      Select a diet
+      <Select value={diet} onChange={(e) => setDiet(e.target.value)} color='white'>
         <option value="">All</option>
         {diets.map((diet) => {
           return <option key={diet.id}>{diet.diet}</option>
