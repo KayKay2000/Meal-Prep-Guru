@@ -1,12 +1,13 @@
 import axios from 'axios'
-const apiKey = "a305942736b44f9aa6879f92ab78f647";
+const apiKey = "de796f2239c841b099773f5034406613";
 const defaultState = {
   form: {
     cuisine: '',
     diet: '',
     mealType: '',
     allergies: [],
-    resultsNumber: ""
+    resultsNumber: "",
+    cookTime: ""
   },
   results: [],
   loading: false
@@ -18,7 +19,7 @@ const SEARCH_SET_LOADING = 'SEARCH_SET_LOADING'
 
 export function search(dispatch, getState) {
   dispatch({ type: 'SEARCH_SET_LOADING' })
-  const { cuisine, diet, mealType, allergies, resultsNumber } = getState().search.form
+  const { cuisine, diet, mealType, allergies, resultsNumber, cookTime } = getState().search.form
 
   let tags = []
   if (cuisine.length) tags.push(cuisine);
@@ -32,6 +33,10 @@ export function search(dispatch, getState) {
 
   if (resultsNumber) {
     url += `&number=${resultsNumber}`
+  }
+
+  if (cookTime) {
+    url += `&maxReadyTime=${cookTime}`
   }
 
   if (allergies.length) {

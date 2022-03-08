@@ -14,8 +14,18 @@ import Dessert from './pages/Dessert';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
 import Favorites from './pages/Favorites';
+import CrockPot from './pages/CrockPot'
+import Under45minutes from './pages/Under45minutes'
 import { fetchFavorites } from './redux/reducers/favoritesReducer';
 import { useEffect } from 'react';
+import Recipes from './pages/Recipes';
+import GlutenFree from './pages/GlutenFree';
+import Drinks from './pages/Drinks';
+import Italian from './pages/Italian';
+import Spanish from './pages/Spanish';
+import Southern from './pages/Southern';
+import Vegetarian from './pages/Vegetarian';
+import Keto from './pages/Keto';
 
 
 function App() {
@@ -62,6 +72,16 @@ function App() {
         <Route path="/dessert" element={<Dessert />} />
         <Route path="/favorites" element={<Favorites />} />
        {/* <Route path="/profile" element={<Profile />} /> */}
+       <Route path="/crock-pot" element={<CrockPot />} />
+       <Route path="/under45" element={<Under45minutes />} />
+       <Route path="/recipes" element={<Recipes />} />
+       <Route path="/gluten-free" element={<GlutenFree />} />
+       <Route path="/drinks" element={<Drinks />} />
+       <Route path="/italian" element={<Italian />} />
+       <Route path="/spanish" element={<Spanish />} />
+       <Route path="/southern" element={<Southern />} />
+       <Route path="/vegetarian" element={<Vegetarian />} />
+       <Route path="/keto" element={<Keto />} />
       </Routes>
     </div >
   );
