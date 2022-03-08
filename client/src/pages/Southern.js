@@ -5,7 +5,7 @@ import RecipeResults from '../components/RecipeResults'
 import { useDispatch } from 'react-redux';
 import { setSearch } from '../redux/reducers/searchReducer';
 
-export default function Breakfast() {
+export default function Southern() {
   const dispatch = useDispatch()
   const [width, setWidth] = useState(window.innerWidth);
   const breakPoint = 840;
@@ -19,7 +19,7 @@ export default function Breakfast() {
   }, []);
 
   useEffect(() => {
-    dispatch(setSearch('mealType', "breakfast"))
+    dispatch(setSearch('cuisine', "southern"))
   }, [dispatch])
 
   return (
@@ -32,10 +32,10 @@ export default function Breakfast() {
             templateColumns='repeat(3, 1fr)'
 
           >
-            <GridItem rowSpan={1} colSpan={1} bg='rgb(38, 45, 51)'><SearchForm hideMealType /></GridItem>
+            <GridItem rowSpan={1} colSpan={1} bg='rgb(38, 45, 51)'><SearchForm hideCuisine /></GridItem>
             <GridItem colSpan={2} bg='rgb(38, 45, 51)'>
               <br />
-              <Heading as='h2' size='xl' className='logo' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}>Breakfast</Heading>
+              <Heading as='h2' size='xl' className='logo' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}>Southern Recipes</Heading>
               <br /><RecipeResults /></GridItem>
           </Grid>
         </div>
@@ -46,10 +46,10 @@ export default function Breakfast() {
           templateColumns='repeat(3, 1fr)'
           gap={4}
         >
-          <GridItem rowSpan={1} colSpan={3} bg='rgb(38, 45, 51)'><SearchForm hideMealType /></GridItem>
+          <GridItem rowSpan={1} colSpan={3} bg='rgb(38, 45, 51)'><SearchForm hideCuisine /></GridItem>
           <GridItem colSpan={3} bg='rgb(38, 45, 51)'>
             <br />
-            <Heading as='h2' size='xl' className='logo' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}>Breakfast</Heading>
+            <Heading as='h2' size='xl' className='logo' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}>Southern Recipes</Heading>
             <br />
             <RecipeResults />
           </GridItem>

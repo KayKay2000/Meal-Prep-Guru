@@ -6,7 +6,8 @@ const defaultState = {
     diet: '',
     mealType: '',
     allergies: [],
-    resultsNumber: ""
+    resultsNumber: "",
+    cookTime: ""
   },
   results: [],
   loading: false
@@ -18,7 +19,7 @@ const SEARCH_SET_LOADING = 'SEARCH_SET_LOADING'
 
 export function search(dispatch, getState) {
   dispatch({ type: 'SEARCH_SET_LOADING' })
-  const { cuisine, diet, mealType, allergies, resultsNumber } = getState().search.form
+  const { cuisine, diet, mealType, allergies, resultsNumber, cookTime } = getState().search.form
 
   let tags = []
   if (cuisine.length) tags.push(cuisine);
@@ -32,6 +33,10 @@ export function search(dispatch, getState) {
 
   if (resultsNumber) {
     url += `&number=${resultsNumber}`
+  }
+
+  if (cookTime) {
+    url += `&maxReadyTime=${cookTime}`
   }
 
   if (allergies.length) {
