@@ -176,7 +176,7 @@ nav{
 }
 .background {
   background-color: rgb(38, 45, 51);
-  height: 100vh;
+  /* height: 100vh; */
 }
 .homeBackground {
   background-color: rgb(38, 45, 51);

@@ -22,7 +22,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchImage = async (category) => {
-      let response = await axios.get(`https://api.spoonacular.com/recipes/random?apiKey=2006cf2c3e4c4763861230ad68a14371&tags=${category}`);
+      let response = await axios.get(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&tags=${category}`);
       return response.data.recipes[0].image ? response.data.recipes[0] : fetchImage(category);
       
     }

@@ -29,7 +29,7 @@ function Register() {
     const handleSubmit = async(e) => {
         e.preventDefault()
         const postObject ={username, firstName, lastName, email}
-        axios.post('https://api.spoonacular.com/users/connect?apiKey=de796f2239c841b099773f5034406613', postObject)
+        axios.post(`https://api.spoonacular.com/users/connect?apiKey=${process.env.REACT_APP_API_KEY}`, postObject)
             .then(async res => {
                 const userData = {
                     ...postObject,

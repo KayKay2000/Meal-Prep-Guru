@@ -48,5 +48,6 @@ dispatch(search)
   </Button>
     </Box>
     </Center>
-  </div>
+    </div>
+  
 }

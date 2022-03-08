@@ -4,12 +4,14 @@ import { keyframes } from 'styled-components'
 import { useEffect, useState } from 'react';
 import MealSlot from './MealSlot';
 import axios from 'axios';
-import { Spinner } from '@chakra-ui/react'
+import { Spinner, useDisclosure } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setPlanner } from '../../redux/reducers/plannerReducer';
 import { PrevButton } from './buttons/PrevButton';
 import { NextButton } from './buttons/NextButton';
+import AddItemModal from './modal/AddItemModal';
+import { appearAnimation } from '../animations/appearAnimation';
 
 function MealCalendar() {
   const addZero = (number) => {
@@ -67,6 +69,7 @@ function MealCalendar() {
   const [ week, setWeek ] = useState(getThisWeek);
   const [ loadingState, setLoadingState ] = useState('NOT LOADED');
   const [ errorState, setErrorState ] = useState({});
+  const { isOpen, onOpen, onClose } = useDisclosure();
   
   const handleRerender = () => {
     setRenderPlan(!renderPlan);
@@ -172,13 +175,16 @@ function MealCalendar() {
                             item.additionalData = plannerData.imageObjectMap[`${item.value.id}`];
                           })
                         }
-                        return <MealSlot slotData={slotData} index={index} status={true} render={() => handleRerender()} key={index} />
+                        return <MealSlot slotData={slotData} index={index} onOpen={onOpen} status={true} render={handleRerender} key={index} />
                       } else {
-                        return <MealSlot index={index} status={false} render={() => handleRerender()} key={index} />
+                        return <MealSlot index={index} onOpen={onOpen} status={false} render={handleRerender} key={index} />
                       }
                   })}
                 </Grid>  
             </DayAndGridContainer>
+        }
+        {
+        <AddItemModal isOpen={isOpen} onClose={onClose}/>
         }
         {
           loadingState === 'ERROR' &&
@@ -197,11 +203,6 @@ function MealCalendar() {
       </PageContainer>
   )
 }
-
-const appearAnimation = keyframes`
- 0% { opacity: 0; }
- 100% { opacity: 1; }
-`
 
 const PageContainer = styled.div`
   width: 100vw;
