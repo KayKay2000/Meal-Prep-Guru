@@ -1,6 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import MealItem from './MealItem';
+import AddRecipeButton from './buttons/AddRecipeButton';
+
+export const MealLabel = styled.span`
+    justify-self: flex-start;
+    font-size: 1vw;
+    font-weight: 200;
+    margin-bottom: .2vw;
+`
 
 function MealSlot(props) {
     const maxPosition = props.status ? 
@@ -38,7 +46,7 @@ function MealSlot(props) {
         ''
         }
         {
-        props.index > 20 || <AddRecipeButton><PlusSpan>+</PlusSpan></AddRecipeButton>
+        props.index > 20 || <AddRecipeButton />
         }
     </SlotContainer>
   )
@@ -58,38 +66,4 @@ const SlotContainer = styled.div`
     border-color: #00000030;
 `
 
-const MealLabel = styled.span`
-    justify-self: flex-start;
-    font-size: 1vw;
-    font-weight: 200;
-    margin-bottom: .2vw;
-`
-
-const AddRecipeButton = styled.button`
-    width: 3vw;
-    height: 3vw;
-    border-radius: 100px;
-    background-color: transparent;
-    border-style: solid;
-    border-width: .1vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: .5vw;
-    padding: 0;
-    transition: color .1s, background-color .3s, opacity .1s;
-    &:hover {
-        background-color: black;
-        color: white
-    }
-    &:active {
-        opacity: .3;
-    }
-`
-
-const PlusSpan = styled(MealLabel)`
-    font-weight: 100;
-    font-size: 2vw;
-    margin-bottom: 17%;
-`
 export default MealSlot;
