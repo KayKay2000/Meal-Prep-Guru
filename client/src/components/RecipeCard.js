@@ -41,7 +41,6 @@ export default function RecipeCard(props) {
   if (!recipe) {
     return "No results, Please broaden your search!"
   }
-// console.log(recipe)
   return (
 <div>
     <Center>

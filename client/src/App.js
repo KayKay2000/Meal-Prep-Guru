@@ -46,7 +46,7 @@ function App() {
                   <Link to="/favorites">Favorites</Link>
                   <Link to="/profile">Profile</Link>
           <div className='loginCredentials'>
-            <div>Hello, {currentUser.firstName}</div>
+            <div>Hello, {currentUser.firstName}!</div>
               <Button onClick={handleLogout} colorScheme="blue" variant='link'>Logout</Button>
             </div>
           </nav>
