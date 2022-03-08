@@ -25,13 +25,16 @@ dispatch(search)
     <MealTypesSearch />
     <Spacer/>
     </>}
-    <CuisineSearch />
+    {props.hideCuisine || <> <CuisineSearch />
     <Spacer/>
-    <DietSearch />
+    </>}
+    {props.hideDiet || <> <DietSearch />
     <NumberOfResults />
     <Spacer/>
-    <AllergiesSearch />
+    </>}
+    {props.hideAllergies || <> <AllergiesSearch />
     <Spacer/>
+    </>}
     </Flex>
     <Button size='md'
             height='28px'
