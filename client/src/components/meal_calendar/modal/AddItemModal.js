@@ -7,22 +7,26 @@ import {
     ModalCloseButton,
 } from '@chakra-ui/react'
 import PlannerFavorites from './PlannerFavorites';
+import SearchForm from '../../SearchForm';
 
 function AddItemModal(props) {
   const [ isSelected, setIsSelected ] = useState('favorites');
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose}>
+    <Modal size={'lg'} isOpen={props.isOpen} onClose={props.onClose}>
         <ModalOverlay />
         <ModalContent>
             <ModalBackground>
                 <ModalNavContainer>
                     <TabSelector select={'favorites'} isSelected={isSelected} onClick={() => setIsSelected('favorites')} >FAVORITES</TabSelector>
-                    <TabSelector select={'recipes'} isSelected={isSelected} onClick={() => setIsSelected('recipes')} >RECIPE SEARCH</TabSelector>
+                    <TabSelector select={'search'} isSelected={isSelected} onClick={() => setIsSelected('search')} >RECIPE SEARCH</TabSelector>
                     <TabSelector select={'results'} isSelected={isSelected} onClick={() => setIsSelected('results')} >RESULTS</TabSelector>
                     <MyModalCloseButton />
                 </ModalNavContainer>
                 {
                     isSelected === 'favorites' && <PlannerFavorites />
+                }
+                {
+                    isSelected === 'search' && <ModalSearchForm />
                 }
             </ModalBackground>
         </ModalContent>
@@ -32,11 +36,11 @@ function AddItemModal(props) {
 
 const ModalBackground = styled.div`
     background-color: white;
-    height: 50vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     box-sizing: content-box;
-    overflow: hidden;
+    overflow: scroll;
 `
 
 const ModalNavContainer = styled.div`
@@ -49,6 +53,7 @@ const ModalNavContainer = styled.div`
     align-items: center;
     overflow: hidden;
     border-radius: 0px;
+    position: sticky;
 `
 
 const TabSelector = styled.button`
@@ -93,4 +98,9 @@ const MyModalCloseButton = styled(ModalCloseButton)`
     }
 `
 
+const ModalSearchForm = styled(SearchForm)`
+    width: 50%;
+    height: 10%;
+    position: relative;
+`
 export default AddItemModal;

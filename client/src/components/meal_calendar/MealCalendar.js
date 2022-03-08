@@ -11,6 +11,7 @@ import { setPlanner } from '../../redux/reducers/plannerReducer';
 import { PrevButton } from './buttons/PrevButton';
 import { NextButton } from './buttons/NextButton';
 import AddItemModal from './modal/AddItemModal';
+import { appearAnimation } from '../animations/appearAnimation';
 
 function MealCalendar() {
   const addZero = (number) => {
@@ -202,11 +203,6 @@ function MealCalendar() {
       </PageContainer>
   )
 }
-
-const appearAnimation = keyframes`
- 0% { opacity: 0; }
- 100% { opacity: 1; }
-`
 
 const PageContainer = styled.div`
   width: 100vw;
