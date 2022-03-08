@@ -14,7 +14,7 @@ const dispatch = useDispatch();
 dispatch(search)
   }
 
-  return <div className='background'>
+  return (
 <Center>
   <Box border='solid' boxShadow='4px 7px 10px 1px #80808066' p='6' rounded='md' bg='black' m={15} position='sticky' top='10'>
   <Heading as='h4' size='md' fontWeight='medium' color='white'>
@@ -47,6 +47,6 @@ dispatch(search)
     Get Recipes
   </Button>
     </Box>
-    </Center>
-  </div>
+    </Center>)
+  
 }

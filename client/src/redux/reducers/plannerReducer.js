@@ -10,10 +10,10 @@ export function setPlanner(mealPlan) {
 }
 
 export function plannerReducer(state = defaultState, action) {
-    switch (action.type) {
-      case PLANNER_SET_PLANNER:
-        return action.mealPlan;
-      default:
-        return state;
-    }
+  switch (action.type) {
+    case PLANNER_SET_PLANNER:
+      return action.mealPlan;
+    default:
+      return state;
   }
+}
