@@ -1,12 +1,12 @@
 
 import MealCalendar from './components/meal_calendar/MealCalendar';
-import {Navigate, Route, Routes, useNavigate} from 'react-router';
+import {Route, Routes, useNavigate} from 'react-router';
 import {Link} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
 import Home from './pages/Home';
 import { checkUser, logout } from './redux/reducers/userReducer';
-import { Button, Center, IconButton, Menu, MenuButton, MenuItem, MenuList, Heading } from '@chakra-ui/react';
+import { Button, Heading } from '@chakra-ui/react';
 import Breakfast from './pages/Breakfast';
 import Lunch from './pages/Lunch';
 import Dinner from './pages/Dinner';
@@ -39,7 +39,7 @@ function App() {
     <div className="App">
         { currentUser && 
         <div className='hide'>
-          <Heading as='h2' size='lg'  className='logo' fontFamily='fantasy' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}>Meal Prep Guru</Heading>
+          <Heading as='h2' size='lg'  className='logo' fontFamily='fantasy' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}><Link to='/home'>Meal Prep Guru</Link></Heading>
           <nav>
                   <Link to="/recipes">Recipes</Link>
                   <Link to="/meal-planner">Meal Planner</Link>
