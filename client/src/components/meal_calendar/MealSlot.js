@@ -36,7 +36,7 @@ function MealSlot(props) {
         props.status ?
             props.slotData.type === 'meals' ?  
                 props.slotData.items.length > 0 ?
-                    props.slotData.items.map((item, index) => <MealItem item={item} date={props.slotData.date} duplicatePosition={maxPosition + 1} render={() => props.render()} key={index}/>)
+                    props.slotData.items.map((item, index) => <MealItem item={item} date={props.slotData.date} duplicatePosition={maxPosition + 1} render={props.render} key={index}/>)
                     :
                     ''
                 :
@@ -46,7 +46,7 @@ function MealSlot(props) {
         ''
         }
         {
-        props.index > 20 || <AddRecipeButton />
+        props.index > 20 || <AddRecipeButton index={props.index} onOpen={props.onOpen} />
         }
     </SlotContainer>
   )
