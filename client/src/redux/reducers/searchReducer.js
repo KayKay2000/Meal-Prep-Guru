@@ -1,5 +1,5 @@
 import axios from 'axios'
-const apiKey = "de796f2239c841b099773f5034406613";
+const apiKey = "2006cf2c3e4c4763861230ad68a14371";
 const defaultState = {
   form: {
     cuisine: '',

@@ -23,7 +23,7 @@ export default function Lunch() {
   }, [dispatch])
 
   return (
-    <div>
+    <div className='background'>
       {width > breakPoint ? (
         <div>
           <Grid

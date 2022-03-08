@@ -23,7 +23,7 @@ export default function Recipes() {
   }, [dispatch])
 
   return (
-    <div>
+    <div className='background'>
       {width > breakPoint ? (
         <div>
           <Grid

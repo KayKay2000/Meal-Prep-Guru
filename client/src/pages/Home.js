@@ -22,7 +22,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchImage = async (category) => {
-      let response = await axios.get(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${category}`);
+      let response = await axios.get(`https://api.spoonacular.com/recipes/random?apiKey=2006cf2c3e4c4763861230ad68a14371&tags=${category}`);
       return response.data.recipes[0].image ? response.data.recipes[0] : fetchImage(category);
       
     }
@@ -47,7 +47,7 @@ export default function Home() {
 
 
   return (
-    <div>
+    <div className='homeBackground'>
       <Center>
       <SimpleGrid mt={10} mx={5} gap={5} columns={{ sm: 1, md: 2, lg: 4 }}>
 
@@ -55,13 +55,13 @@ export default function Home() {
             
             return (
             <Box w="270px" rounded="20px"
-            overflow="hidden" bg={'white'} mt={10}>
-            <Box boxShadow='dark-lg' p='6' rounded='md' bg='white'>
+            overflow="hidden" bg={'black'} mt={10} color='white'>
+            <Box p='6' rounded='md' bg='black' border='solid' borderColor='white' borderWidth='thin'>
               <Image rounded='md' src={categoryItem.image} alt={categoryItem.title} boxSize="250px">
               </Image>
             </Box>
             <Box mt={5}><a href={menuItem[i].link}><Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
-            <strong>{menuItem[i].title}</strong>
+            <strong>{menuItem[i].title.toUpperCase()}</strong>
           </Box></a>
           </Box>
             </Box>
@@ -70,8 +70,8 @@ export default function Home() {
         </SimpleGrid>
         </Center>
         <Center>
-          <Box mt={10}>
-            <Heading>Explore More Options...</Heading>
+          <Box mt={10} bg='rgb(38, 45, 51)' color='white'>
+            <Heading color='white'>Explore More Options...</Heading>
           <SimpleGrid mt={10} mx={5} gap={5} columns={{ sm: 1, md: 2, lg: 4 }}>
           <Link to="/crock-pot"><Box><img className="item" src={crockpot} alt="crock pot"/>Crock Pot</Box></Link>
           <Link to="/drinks"><Box><img className="item" src={drinks} alt="drinks"/>Drinks</Box></Link>
