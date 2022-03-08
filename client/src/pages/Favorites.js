@@ -13,11 +13,7 @@ function Favorites() {
       return
     }
 
-<<<<<<< HEAD
     axios.get(`https://api.spoonacular.com/recipes/informationBulk/?apiKey=${process.env.REACT_APP_API_KEY}&ids=${favorites.map((favorite) => favorite.recipeID).join(',')}`)
-=======
-    axios.get(`https://api.spoonacular.com/recipes/informationBulk/?apiKey=de796f2239c841b099773f5034406613&ids=${favorites.map((favorite) => favorite.recipeID).join(',')}`)
->>>>>>> main
       .then((res) => {
         setResults(res.data)
       })
