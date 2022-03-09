@@ -11,6 +11,9 @@ import { Flex, Button, Center, Spacer, Box, Heading } from '@chakra-ui/react';
 export default function SearchForm(props) {
 const dispatch = useDispatch();
   const fetchRecipe = () => {
+    if (props.isModal) {
+      props.setIsSelected('results');
+    }
     dispatch(search)
   }
 

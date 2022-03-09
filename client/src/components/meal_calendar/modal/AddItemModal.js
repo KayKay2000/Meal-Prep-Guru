@@ -9,9 +9,20 @@ import {
 import PlannerFavorites from './PlannerFavorites';
 import SearchForm from '../../SearchForm';
 import ModalResults from './ModalResults';
+import { useSelector } from 'react-redux';
 
 function AddItemModal(props) {
+
+    const getDateSeconds = (dateString) => {
+      const splitArray = dateString.split('-');
+      const mondayObject = new Date(parseInt(splitArray[0]), parseInt(splitArray[1]) - 1, parseInt(splitArray[2]));
+      const dayOffset = 86400000 * (index % 7);
+      return ((mondayObject.getTime() + dayOffset) / 1000);
+    }
+
   const [ isSelected, setIsSelected ] = useState('favorites');
+  const { index, slot, position } = useSelector(state => state.newItemSlotData);
+  const dateSeconds = getDateSeconds(props.week);
   return (
     <Modal size={'lg'} isOpen={props.isOpen} onClose={props.onClose}>
         <ModalOverlay />
@@ -27,7 +38,7 @@ function AddItemModal(props) {
                     isSelected === 'favorites' && <PlannerFavorites />
                 }
                 {
-                    isSelected === 'search' && <ModalComponentContainer><SearchForm isModal={true} /></ModalComponentContainer>
+                    isSelected === 'search' && <ModalComponentContainer><SearchForm isModal={true} setIsSelected={setIsSelected} /></ModalComponentContainer>
                 }
                 {
                     isSelected === 'results' && <ModalResults />

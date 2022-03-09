@@ -1,15 +1,27 @@
 import { Button } from '@chakra-ui/react';
+import axios from 'axios';
 import React from 'react'
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { appearAnimation } from '../../animations/appearAnimation';
 
-
-
 function PlannerItemCard(props) {
     const { image, title, servings, readyInMinutes, pricePerServing, spoonacularScore, sourceUrl } = props.recipe;
-
+    const user = useSelector(state => state.user);
     const handleViewRecipe = () => {
         window.open(sourceUrl);
+    }
+
+    const handleAddItem = () => {
+        axios.post(`https://api.spoonacular.com/mealplanner/safehaven1017/items?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`, {
+            date: props.date,
+            slot: props.item.slot,
+            position: props.duplicatePosition,
+            type: props.item.type,
+            value: props.item.value
+        }).then(() => {
+            props.render();
+        });
     }
     return (
     <FavoriteCardContainer>
@@ -24,7 +36,7 @@ function PlannerItemCard(props) {
             <Detail>SCORE: {spoonacularScore}</Detail>
             <ButtonContainer>
                 <CardButton onClick={handleViewRecipe} >VIEW RECIPE</CardButton>
-                <CardButton>ADD TO PLANNER</CardButton>
+                <CardButton onClick={handleAddItem} >ADD TO PLANNER</CardButton>
             </ButtonContainer>
         </DetailsContainer>
     </FavoriteCardContainer>
