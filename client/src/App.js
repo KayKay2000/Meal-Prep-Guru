@@ -26,6 +26,7 @@ import Spanish from './pages/Spanish';
 import Southern from './pages/Southern';
 import Vegetarian from './pages/Vegetarian';
 import Keto from './pages/Keto';
+import Protect from './components/Protect';
 
 
 function App() {
@@ -64,7 +65,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Register />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/meal-planner" element={<MealCalendar />} />
+        <Route path="/meal-planner" element={<Protect><MealCalendar /></Protect>} />
         <Route path="/breakfast" element={<Breakfast />} />
         <Route path="/lunch" element={<Lunch />} />
         <Route path="/dinner" element={<Dinner />} />

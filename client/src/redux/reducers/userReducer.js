@@ -1,5 +1,6 @@
 const defaultState = {
-    currentUser: null
+    currentUser: null,
+    loaded: false
 }
 
 const USER_LOGGED_IN = 'USER_LOGGED_IN'
@@ -27,7 +28,7 @@ export const checkUser = (dispatch, getState) => {
     fetch('/api/v1/users/current')
         .then((res) => {
             if (res.ok){return res.json()}
-            throw new Error('not logged in')
+            dispatch({ type: USER_LOGGED_OUT })
         })
         .then((data) => {
             dispatch(loggedIn(data))
@@ -39,12 +40,14 @@ export const userReducer = (state = defaultState, action) => {
         case USER_LOGGED_IN:
             return {
                 ...state,
-                currentUser: action.user
+                currentUser: action.user,
+                loaded: true
             }
         case USER_LOGGED_OUT:
             return {
                 ...state,
-                currentUser: null
+                currentUser: null,
+                loaded: true
             }
         default:
             return state
