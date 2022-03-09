@@ -58,7 +58,6 @@ function MealCalendar() {
     return `${MONTHS[parseInt(splitDate[1]) - 1]} ${removeZero(splitDate[2])}`
   }
 
-  const navigate = useNavigate();
   const weekdayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const planner = useSelector(state => state.planner);
   const user = useSelector(state => state.user);
@@ -75,17 +74,16 @@ function MealCalendar() {
   }
 
   useEffect(() => {
-    if (!user.currentUser) return;
     setLoadingState('LOADING');
-    axios.get(`https://api.spoonacular.com/mealplanner/${user.currentUser.spoonacularUsername}/week/${week}?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`)
-    .then(res => {
-    dispatch(setPlanner(res.data.days));
-    }).catch(error => {
-      if (error.response) {
-        setLoadingState('ERROR');
-        setErrorState(error.response.data)
-      }
-    })
+      axios.get(`https://api.spoonacular.com/mealplanner/${user.currentUser.spoonacularUsername}/week/${week}?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`)
+      .then(res => {
+      dispatch(setPlanner(res.data.days));
+      }).catch(error => {
+        if (error.response) {
+          setLoadingState('ERROR');
+          setErrorState(error.response.data)
+        }
+      })
   }, [dispatch, renderPlan, week, user.currentUser]);
   useEffect(() => {
     if (planner.length && loadingState !== 'ERROR') {
@@ -141,7 +139,6 @@ function MealCalendar() {
     }
   }
   
-  !user.currentUser && navigate('/Sign-in');
 
   return (
     user.currentUser &&
@@ -149,7 +146,7 @@ function MealCalendar() {
         {
           (loadingState === 'NOT LOADED' ||
           loadingState === 'LOADING') &&
-          <Spinner size='xl' /> 
+          <Spinner size='xl' margin={'2vw'} /> 
         }    
         {
           (loadingState === 'LOADED' ||
@@ -215,10 +212,11 @@ const PageContainer = styled.div`
   display: flex;
   justify-content: center;
   transition: .5s;
-  margin-top: 2vw;
-`
+  background-color: white;
+  `
 
 const DayAndGridContainer = styled.div`
+  margin-top: 2vw;
   display: flex;
   flex-direction: column;
   width: min-content;
