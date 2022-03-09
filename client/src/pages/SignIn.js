@@ -67,7 +67,7 @@ function SignIn() {
                     <br /> <br />
                     <form onSubmit={handleSubmit}>
                     { error && (
-                        <Alert maxWidth="400px" mx="auto" my="5" status='error' variant='subtle'>
+                        <Alert maxWidth="400px" mx="auto" my="5" status='error' variant='subtle' color='black'>
                         <AlertIcon />
                         Error!&nbsp;{error}
                         </Alert>

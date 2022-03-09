@@ -12,7 +12,7 @@ export default function MealTypesSearch(props) {
   }
 
   return (
-    <div>
+    <div className='option'>
       <b>Select a meal type</b>
       <Select value={mealType} onChange={(e) => setMealType(e.target.value)} >
         <option value="">All</option>

@@ -1,6 +1,6 @@
 
 import MealCalendar from './components/meal_calendar/MealCalendar';
-import { Route, Routes, useNavigate} from 'react-router';
+import {Route, Routes, useNavigate} from 'react-router';
 import {Link} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
@@ -49,14 +49,13 @@ function App() {
     <div className="App">
         { currentUser && 
         <div className='hide'>
-          <Link to="/home"><Heading as='h2' size='lg'  className='logo' fontFamily='fantasy' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}>Meal Prep Guru</Heading></Link>
+          <Heading as='h2' size='lg'  className='logo' fontFamily='fantasy' pt='10' color='white' alignContent='center' paddingBottom={10} paddingLeft={4}><Link to='/home'>Meal Prep Guru</Link></Heading>
           <nav>
                   <Link to="/recipes">Recipes</Link>
                   <Link to="/meal-planner">Meal Planner</Link>
                   <Link to="/favorites">Favorites</Link>
-                  <Link to="/profile">Profile</Link>
           <div className='loginCredentials'>
-            <div>Hello, {currentUser.firstName}</div>
+            <div>Hello, {currentUser.firstName}!</div>
               <Button onClick={handleLogout} colorScheme="blue" variant='link'>Logout</Button>
             </div>
           </nav>
@@ -71,7 +70,6 @@ function App() {
         <Route path="/dinner" element={<Dinner />} />
         <Route path="/dessert" element={<Dessert />} />
         <Route path="/favorites" element={<Favorites />} />
-       {/* <Route path="/profile" element={<Profile />} /> */}
        <Route path="/crock-pot" element={<CrockPot />} />
        <Route path="/under45" element={<Under45minutes />} />
        <Route path="/recipes" element={<Recipes />} />

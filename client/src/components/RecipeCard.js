@@ -41,19 +41,18 @@ export default function RecipeCard(props) {
   if (!recipe) {
     return "No results, Please broaden your search!"
   }
-// console.log(recipe)
   return (
 <div>
     <Center>
       <Box w="300px" rounded="20px" 
         overflow="hidden" bg={'black'} mt={10} >
-        <Box p='6' rounded='md' bg='black' border='solid' borderColor='white' borderWidth='thin' >
-          <Image rounded='md' src={recipe.image} alt={recipe.title} boxSize="250px">
+        <div className="imgContainer">
+          <Image rounded='md' color='white' src={recipe.image} alt={recipe.title} >
           </Image>
-        </Box>
+          </div>
         <Box p={5} bg='black' >
           <Stack align="center" bg='black'>
-            <Text as="h2" fontWeight="bold" my={2} color='white'>
+            <Text as="h2" fontWeight="bold" my={2} color='white' height={50}>
               {recipe.title}
             </Text>
             <Badge variant="solid" colorScheme="blue"
