@@ -9,7 +9,6 @@ const logger = require('morgan');
 const db = require("./models");
 const SequelizeSession = require('connect-session-sequelize')(session.Store)
 const store = new SequelizeSession({ db: db.sequelize })
-const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/api/users');
 const favoritesRouter = require('./routes/api/favorites');
 const cors = require("cors");
@@ -38,9 +37,9 @@ app.use(
   })
 );
 store.sync();
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.use('/', indexRouter);
+
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/favorites', favoritesRouter)
 
