@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import MealItem from './MealItem';
 import AddRecipeButton from './buttons/AddRecipeButton';
@@ -11,10 +11,21 @@ export const MealLabel = styled.span`
 `
 
 function MealSlot(props) {
-    const maxPosition = props.status ? 
-        props.slotData.type === 'meals' && props.slotData.items.map(item => item.position).reduce((a, b) => Math.max(a, b), -Infinity) 
-        : 
-        null;
+    const maxPosition = props.slotData.type === 'meals' ? 
+        props.slotData.items.length > 0 ?
+            props.slotData.items.map(item => item.position).reduce((a, b) => Math.max(a, b), -Infinity)
+            :
+            0
+        :
+        'none'  
+
+    const slot = props.index > 13 ?
+        3
+        :
+        props.index > 6 ?
+            2
+            :
+            1
     return (
     <SlotContainer type={props.status ? props.slotData.type : 'none'} >
         {
@@ -46,7 +57,7 @@ function MealSlot(props) {
         ''
         }
         {
-        props.index > 20 || <AddRecipeButton index={props.index} onOpen={props.onOpen} />
+        props.index > 20 || <AddRecipeButton index={props.index} slot={slot} position={maxPosition + 1} onOpen={props.onOpen} />
         }
     </SlotContainer>
   )

@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   user: userReducer,
   planner: plannerReducer,
-  addIndex: addRecipeReducer
+  newItemSlotData: addRecipeReducer
 })
 
 export default rootReducer

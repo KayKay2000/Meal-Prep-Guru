@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setIndex } from '../../../redux/reducers/addRecipeReducer';
+import { setNewItemSlotData } from '../../../redux/reducers/addRecipeReducer';
 // import { MealLabel } from '../MealSlot';
 
 const MealLabel = styled.span`
@@ -14,7 +14,7 @@ const MealLabel = styled.span`
 function AddRecipeButton(props) {
     const dispatch = useDispatch();
     const handleClick = () => {
-        dispatch(setIndex(props.index));
+        dispatch(setNewItemSlotData(props.index, props.slot, props.position));
         props.onOpen();
     }
     return (
@@ -52,6 +52,4 @@ const PlusSpan = styled(MealLabel)`
     margin-bottom: 17%;
 `
 
-
-
-export default AddRecipeButton
+export default AddRecipeButton;

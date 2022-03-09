@@ -8,9 +8,11 @@ import {
 } from '@chakra-ui/react'
 import PlannerFavorites from './PlannerFavorites';
 import SearchForm from '../../SearchForm';
+import ModalResults from './ModalResults';
 
 function AddItemModal(props) {
-  const [ isSelected, setIsSelected ] = useState('favorites');
+
+  const [ isSelected, setIsSelected ] = useState('search');
   return (
     <Modal size={'lg'} isOpen={props.isOpen} onClose={props.onClose}>
         <ModalOverlay />
@@ -23,10 +25,13 @@ function AddItemModal(props) {
                     <MyModalCloseButton />
                 </ModalNavContainer>
                 {
-                    isSelected === 'favorites' && <PlannerFavorites />
+                    isSelected === 'favorites' && <PlannerFavorites dateString={props.dateString} render={props.render} />
                 }
                 {
-                    isSelected === 'search' && <ModalSearchForm />
+                    isSelected === 'search' && <ModalComponentContainer><SearchForm isModal={true} setIsSelected={setIsSelected} /></ModalComponentContainer>
+                }
+                {
+                    isSelected === 'results' && <ModalResults dateString={props.dateString} render={props.render} />
                 }
             </ModalBackground>
         </ModalContent>
@@ -36,29 +41,29 @@ function AddItemModal(props) {
 
 const ModalBackground = styled.div`
     background-color: white;
-    height: 70vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     box-sizing: content-box;
     overflow: scroll;
+    position: relative;
 `
 
 const ModalNavContainer = styled.div`
     display: flex;
     background-color: white;
-    height: 10%;
+    height: 7%;
     width: 100%;
     flex-direction: row;
     border-color: black;
     align-items: center;
-    overflow: hidden;
     border-radius: 0px;
-    position: sticky;
+    top: 0px;
 `
 
 const TabSelector = styled.button`
     height: 20vh;
-    width: 28%;
+    width: 30%;
     background-color: ${props => props.isSelected === props.select ? 'white' : 'black'};
     color: ${props => props.isSelected === props.select ? 'black' : 'white'};
     font-weight: 200;
@@ -85,22 +90,29 @@ const MyModalCloseButton = styled(ModalCloseButton)`
     bottom: 0;
     transition: .3s;
     background-color: white;
+    border-radius: 0px;
     color: black;
-    border-radius: 0;
-    border-style: none;
+    border-style: solid;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: solid;
     border-color: black;
-    border-width: 1px;
+    border-width: .1vh;
+    box-sizing: border-box;
     &:hover {
         border-style: none;
         border-color: black;
         background-color: black;
         color: white;
+        border-color: white;
+        border-width: .1vh;
+        border-style: solid;
     }
 `
 
-const ModalSearchForm = styled(SearchForm)`
-    width: 50%;
-    height: 10%;
-    position: relative;
+const ModalComponentContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: white;
 `
 export default AddItemModal;
