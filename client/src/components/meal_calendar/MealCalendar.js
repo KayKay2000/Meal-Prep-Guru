@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { keyframes } from 'styled-components'
 import { useEffect, useState } from 'react';
 import MealSlot from './MealSlot';
 import axios from 'axios';
@@ -169,7 +168,12 @@ function MealCalendar() {
                       if (loadingState === 'LOADED' && plannerData?.mealPlan) {
                         const weekday = weekdayArray[index % 7];
                         const mealPlanDay = getMealPlanDay(weekday, plannerData.mealPlan);
-                        const slotData = mealPlanDay ? getSlotData(index, mealPlanDay) : '';
+                        const slotData = mealPlanDay ? getSlotData(index, mealPlanDay) 
+                          :
+                          index <= 20 ?
+                            {type: 'meals', items: []}
+                            :
+                            {type: 'nutrients', items: []}
                         if (slotData.type === 'meals') {
                           slotData.items.forEach(item => {
                             item.additionalData = plannerData.imageObjectMap[`${item.value.id}`];
@@ -177,14 +181,15 @@ function MealCalendar() {
                         }
                         return <MealSlot slotData={slotData} index={index} onOpen={onOpen} status={true} render={handleRerender} key={index} />
                       } else {
-                        return <MealSlot index={index} onOpen={onOpen} status={false} render={handleRerender} key={index} />
+                        const slotData = index <= 20 ? {type: 'meals', items: []} : {type: 'nutrients', items: []}
+                        return <MealSlot index={index} slotData={slotData} onOpen={onOpen} status={false} render={handleRerender} key={index} />
                       }
                   })}
                 </Grid>  
             </DayAndGridContainer>
         }
         {
-        <AddItemModal isOpen={isOpen} onClose={onClose}/>
+        <AddItemModal dateString={week} isOpen={isOpen} render={handleRerender} onClose={onClose}/>
         }
         {
           loadingState === 'ERROR' &&
