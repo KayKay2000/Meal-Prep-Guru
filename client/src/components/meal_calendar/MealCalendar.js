@@ -183,7 +183,7 @@ function MealCalendar() {
             </DayAndGridContainer>
         }
         {
-        <AddItemModal isOpen={isOpen} onClose={onClose}/>
+        <AddItemModal dateString={week} isOpen={isOpen} render={handleRerender} onClose={onClose}/>
         }
         {
           loadingState === 'ERROR' &&

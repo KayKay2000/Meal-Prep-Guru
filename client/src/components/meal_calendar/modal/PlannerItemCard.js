@@ -6,23 +6,38 @@ import styled from 'styled-components';
 import { appearAnimation } from '../../animations/appearAnimation';
 
 function PlannerItemCard(props) {
-    const { image, title, servings, readyInMinutes, pricePerServing, spoonacularScore, sourceUrl } = props.recipe;
+    const { id, image, title, servings, readyInMinutes, pricePerServing, spoonacularScore, sourceUrl } = props.recipe;
     const user = useSelector(state => state.user);
     const handleViewRecipe = () => {
         window.open(sourceUrl);
     }
+    const { index, slot, position } = useSelector(state => state.newItemSlotData);
+
+    const getDateSeconds = (dateString) => {
+        const splitArray = dateString.split('-');
+        const mondayObject = new Date(parseInt(splitArray[0]), parseInt(splitArray[1]) - 1, parseInt(splitArray[2]));
+        const dayOffset = 86400000 * (index % 7);
+        return ((mondayObject.getTime() + dayOffset) / 1000);
+    }
+
+    const dateSeconds = getDateSeconds(props.dateString);
 
     const handleAddItem = () => {
         axios.post(`https://api.spoonacular.com/mealplanner/safehaven1017/items?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`, {
-            date: props.date,
-            slot: props.item.slot,
-            position: props.duplicatePosition,
-            type: props.item.type,
-            value: props.item.value
+            date: dateSeconds,
+            slot,
+            position,
+            type: 'RECIPE',
+            value: {
+                id,
+                servings,
+                title
+            }
         }).then(() => {
             props.render();
         });
     }
+
     return (
     <FavoriteCardContainer>
         <ImageContainer>

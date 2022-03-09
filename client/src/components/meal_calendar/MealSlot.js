@@ -53,7 +53,7 @@ function MealSlot(props) {
         ''
         }
         {
-        props.index > 20 || <AddRecipeButton slot={slot} position={maxPosition + 1} onOpen={props.onOpen} />
+        props.index > 20 || <AddRecipeButton index={props.index} slot={slot} position={maxPosition + 1} onOpen={props.onOpen} />
         }
     </SlotContainer>
   )
