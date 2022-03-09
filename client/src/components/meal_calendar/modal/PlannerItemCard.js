@@ -1,13 +1,27 @@
 import { Button } from '@chakra-ui/react';
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { appearAnimation } from '../../animations/appearAnimation';
+import { appearAnimation, recipeCardMessage } from '../../animations/appearAnimation';
+import { Spinner } from '@chakra-ui/react';
 
 function PlannerItemCard(props) {
     const { id, image, title, servings, readyInMinutes, pricePerServing, spoonacularScore, sourceUrl } = props.recipe;
     const user = useSelector(state => state.user);
+    const [loadingState, setLoadingState ] = useState('NONE');
+    const [ addMessage, setAddMessage ] = useState({showMessage: false, message: ''});
+    
+    useEffect(() => {
+        const timeId = setTimeout(() => {
+          // After 2 seconds make message disappear
+          setAddMessage({showMessage: false, message: ''})
+        }, 3000);
+        return () => {
+          clearTimeout(timeId);
+        }
+    }, [loadingState]);
+
     const handleViewRecipe = () => {
         window.open(sourceUrl);
     }
@@ -23,6 +37,7 @@ function PlannerItemCard(props) {
     const dateSeconds = getDateSeconds(props.dateString);
 
     const handleAddItem = () => {
+        setLoadingState('LOADING');
         axios.post(`https://api.spoonacular.com/mealplanner/safehaven1017/items?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`, {
             date: dateSeconds,
             slot,
@@ -35,7 +50,14 @@ function PlannerItemCard(props) {
             }
         }).then(() => {
             props.render();
-        });
+            setAddMessage({showMessage: true, message: 'SUCCESSFULLY ADDED'});
+            setLoadingState('SUCCESS');
+        }).catch(error => {
+            if (error.response) {
+                setAddMessage({showMessage: true, message: 'ERROR ADDING ITEM'});
+                setLoadingState('ERROR');
+            }
+          })
     }
 
     return (
@@ -53,6 +75,8 @@ function PlannerItemCard(props) {
                 <CardButton onClick={handleViewRecipe} >VIEW RECIPE</CardButton>
                 <CardButton onClick={handleAddItem} >ADD TO PLANNER</CardButton>
             </ButtonContainer>
+            {loadingState === 'LOADING' && <MessageContainer><Spinner color='black' /></MessageContainer>}
+            {addMessage.showMessage && <MessageContainer showMessage={addMessage.showMessage} loadingState={loadingState} >{addMessage.message}</MessageContainer>}
         </DetailsContainer>
     </FavoriteCardContainer>
   )
@@ -91,6 +115,7 @@ const DetailsContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 `
 
 const RecipeTitle = styled.h4`
@@ -143,6 +168,21 @@ const CardButton = styled(Button)`
         border-style: none;
         border-color: transparent;
     }
+`
+
+const MessageContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    font-weight: 200;
+    color: ${props => props.loadingState === 'SUCCESS' ? 'green' : props.loadingState === 'LOADING' ? 'black' : 'red'};
+    animation-name: ${recipeCardMessage};
+    animation-duration: 2.8s;
 `
 
 export default PlannerItemCard;

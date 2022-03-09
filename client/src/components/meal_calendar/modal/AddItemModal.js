@@ -12,7 +12,7 @@ import ModalResults from './ModalResults';
 
 function AddItemModal(props) {
 
-  const [ isSelected, setIsSelected ] = useState('favorites');
+  const [ isSelected, setIsSelected ] = useState('search');
   return (
     <Modal size={'lg'} isOpen={props.isOpen} onClose={props.onClose}>
         <ModalOverlay />
