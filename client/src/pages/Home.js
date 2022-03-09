@@ -55,8 +55,8 @@ export default function Home() {
             
             return (
             <Box w="270px" rounded="20px"
-            overflow="hidden" bg={'black'} mt={10} color='white'>
-            <Image rounded='md' src={categoryItem.image} alt={categoryItem.title}>
+            overflow="hidden" bg={'black'} mt={10} color='white' boxShadow='4px 7px 10px 1px #80808066'>
+            <Image rounded='md' src={categoryItem.image} alt={categoryItem.title} >
               </Image>
             <Box mt={5}><a href={menuItem[i].link}><Box w="260px" height="50px" rounded="20px" border="1px solid black" pt={3}>
             <strong>{menuItem[i].title.toUpperCase()}</strong>
