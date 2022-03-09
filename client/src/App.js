@@ -54,7 +54,6 @@ function App() {
                   <Link to="/recipes">Recipes</Link>
                   <Link to="/meal-planner">Meal Planner</Link>
                   <Link to="/favorites">Favorites</Link>
-                  <Link to="/profile">Profile</Link>
           <div className='loginCredentials'>
             <div>Hello, {currentUser.firstName}!</div>
               <Button onClick={handleLogout} colorScheme="blue" variant='link'>Logout</Button>
@@ -71,7 +70,6 @@ function App() {
         <Route path="/dinner" element={<Dinner />} />
         <Route path="/dessert" element={<Dessert />} />
         <Route path="/favorites" element={<Favorites />} />
-       {/* <Route path="/profile" element={<Profile />} /> */}
        <Route path="/crock-pot" element={<CrockPot />} />
        <Route path="/under45" element={<Under45minutes />} />
        <Route path="/recipes" element={<Recipes />} />
