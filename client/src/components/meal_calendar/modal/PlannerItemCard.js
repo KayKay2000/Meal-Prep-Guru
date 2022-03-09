@@ -38,7 +38,7 @@ function PlannerItemCard(props) {
 
     const handleAddItem = () => {
         setLoadingState('LOADING');
-        axios.post(`https://api.spoonacular.com/mealplanner/safehaven1017/items?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`, {
+        axios.post(`https://api.spoonacular.com/mealplanner/${user.currentUser.spoonacularUsername}/items?hash=${user.currentUser.spoonacularHash}&apiKey=${process.env.REACT_APP_API_KEY}`, {
             date: dateSeconds,
             slot,
             position,
