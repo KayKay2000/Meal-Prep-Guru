@@ -9,6 +9,7 @@ function PlannerFavorites(props) {
     const favorites = useSelector((state) => state.favorites)
     const [ results, setResults ] = useState();
     const [loadingState, setLoadingState ] = useState('NONE');
+    const [ errorState, setErrorState ] = useState({});
     useEffect(() => {
         setLoadingState('LOADING');
         if (!favorites.length) {
@@ -20,6 +21,11 @@ function PlannerFavorites(props) {
           .then((res) => {
             setResults(res.data)
             setLoadingState('LOADED');
+          }).catch(error => {
+            if (error.response) {
+              setLoadingState('ERROR');
+              setErrorState(error.response.data)
+            }
           })
     
       }, [favorites])
@@ -29,6 +35,20 @@ function PlannerFavorites(props) {
         {loadingState === 'LOADING' && <Spinner />}
         {loadingState === 'LOADED' && results.map((recipe, index) => <PlannerItemCard dateString={props.dateString} render={props.render} recipe={recipe} key={index} />)}
         {loadingState === 'NO RESULTS' && <p>NO FAVORITES</p>}
+        {
+          loadingState === 'ERROR' &&
+          <div style={{textAlign: 'center'}}>
+            <div>
+              Unable to load favorites at this time. There may be an issue on the server, or the website is out of request points.
+            </div>
+            <div>
+              Error Code: {errorState.code}
+            </div>
+            <div>
+              {errorState.message}
+            </div>
+          </div>
+        }
     </ModalBodyContainer>
   )
 }
