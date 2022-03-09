@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { ModalBodyContainer } from './ModalBodyContainer';
 import PlannerItemCard from './PlannerItemCard';
 
 function PlannerFavorites() {
@@ -24,28 +25,13 @@ function PlannerFavorites() {
     
       }, [favorites])
 
-    return (
+      return (
     <ModalBodyContainer>
         {loadingState === 'LOADING' && <Spinner />}
-        {loadingState === 'LOADED' && results.map((favorite, index) => <PlannerItemCard favorite={favorite} key={index} />)}
-        {loadingState === 'NO RESULTS' && <p>No Results...</p>}
+        {loadingState === 'LOADED' && results.map((recipe, index) => <PlannerItemCard recipe={recipe} key={index} />)}
+        {loadingState === 'NO RESULTS' && <p>NO FAVORITES</p>}
     </ModalBodyContainer>
   )
 }
-
-const ModalBodyContainer = styled.div`
-    height: 100%;
-    width: 100%;
-    background-color: white;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: scroll;
-    padding: 1%;
-`
-
-
 
 export default PlannerFavorites

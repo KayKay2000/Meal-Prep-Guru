@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { keyframes } from 'styled-components'
 import { useEffect, useState } from 'react';
 import MealSlot from './MealSlot';
 import axios from 'axios';
