@@ -7,12 +7,11 @@
 .parent {
   display: flex;
   justify-content: space-between;
-  height: 100vh;
+  height: 105vh;
 }
 .leftSide {
   background-color: black;
   width: 55vw;
-
 }
 
 .leftSide img {
@@ -24,7 +23,7 @@
   background-color: black;
   color: whitesmoke;
   width: 45vw;
-  height:max-content;
+  /* height:max-content; */
 }
 .signUpForm {
   width: 70%;
@@ -116,12 +115,12 @@
     height:106vh;
   }
   .rightSide {
-    height:fit-content;
+    height: fit-content;
   }
 }
 @media screen and (max-device-width: 1024px) and (orientation: landscape){
   .leftSide {
-    height: 150vh;
+    height: 149vh;
   }
 } 
 
@@ -139,6 +138,9 @@
   }
 } 
 @media screen and (max-device-width: 820px) and (orientation: portrait){
+  .parent {
+    height: auto;
+  }
   .leftSide {
     height:100vh;
   }
@@ -150,6 +152,9 @@
   }
 }
 @media screen and (min-device-width: 280px) and (max-device-width: 540px) and (orientation: portrait){
+  .parent {
+    height: auto;
+  }
   .leftSide {
     display: none;
   }
@@ -193,3 +198,9 @@ nav{
 .pageLength {
   height: 100%;
 }
+/* .member {
+  padding-top: 2%;
+} */
+/* #root {
+  height:100vh
+} */
