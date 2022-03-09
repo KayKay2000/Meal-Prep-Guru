@@ -62,25 +62,25 @@ function App() {
           </nav>
           </div>}
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Protect><Home /></Protect>} />
         <Route path="/" element={<Register />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/meal-planner" element={<Protect><MealCalendar /></Protect>} />
-        <Route path="/breakfast" element={<Breakfast />} />
-        <Route path="/lunch" element={<Lunch />} />
-        <Route path="/dinner" element={<Dinner />} />
-        <Route path="/dessert" element={<Dessert />} />
-        <Route path="/favorites" element={<Favorites />} />
-       <Route path="/crock-pot" element={<CrockPot />} />
-       <Route path="/under45" element={<Under45minutes />} />
-       <Route path="/recipes" element={<Recipes />} />
-       <Route path="/gluten-free" element={<GlutenFree />} />
-       <Route path="/drinks" element={<Drinks />} />
-       <Route path="/italian" element={<Italian />} />
-       <Route path="/spanish" element={<Spanish />} />
-       <Route path="/southern" element={<Southern />} />
-       <Route path="/vegetarian" element={<Vegetarian />} />
-       <Route path="/keto" element={<Keto />} />
+        <Route path="/breakfast" element={<Protect><Breakfast /></Protect>} />
+        <Route path="/lunch" element={<Protect><Lunch /></Protect>} />
+        <Route path="/dinner" element={<Protect><Dinner /></Protect>} />
+        <Route path="/dessert" element={<Protect><Dessert /></Protect>} />
+        <Route path="/favorites" element={<Protect><Favorites /></Protect>} />
+       <Route path="/crock-pot" element={<Protect><CrockPot /></Protect>} />
+       <Route path="/under45" element={<Protect><Under45minutes /></Protect>} />
+       <Route path="/recipes" element={<Protect><Recipes /></Protect>} />
+       <Route path="/gluten-free" element={<Protect><GlutenFree /></Protect>} />
+       <Route path="/drinks" element={<Protect><Drinks /></Protect>} />
+       <Route path="/italian" element={<Protect><Italian /></Protect>} />
+       <Route path="/spanish" element={<Protect><Spanish /></Protect>} />
+       <Route path="/southern" element={<Protect><Southern /></Protect>} />
+       <Route path="/vegetarian" element={<Protect><Vegetarian /></Protect>} />
+       <Route path="/keto" element={<Protect><Keto /></Protect>} />
       </Routes>
     </div >
   );
